@@ -1,7 +1,13 @@
 {
-  "hero_badge": "⚡ Application Desktop Windows (Client Lourd Ultra-Rapide)",
-  "hero_title": "Oubliez la lenteur de WordPress. Découvrez Woo Relay.",
-  "hero_description": "Connectez votre boutique WooCommerce à une application de bureau locale ultra-rapide. Modifiez vos stocks en 0,1 seconde.",
+  "hero_badge": "CLIENT LOURD WINDOWS (.EXE & .ZIP) • ZÉRO PLUGIN WORDPRESS",
+  "hero_title": "Pilotez votre stock et vos commandes WooCommerce en 0,1 seconde.",
+  "hero_description": "Fini les pages d'administration WordPress qui mettent 10 secondes à charger. Woo Relay connecte votre boutique à une application de bureau locale propulsée par SQLite : gestion des stocks en 1 clic, calcul des marges nettes, alerte sonore des commandes et expédition directe (Yalidine, ZR Express, Maystro, Procolis).",
   "hero_image": "",
-  "cta_button": "Me contacter pour recevoir le logiciel"
+  "cta_button": "Demander ma version d'essai (14 jours)",
+  "feature_1_title": "Gestion de Stock & Prix Ultra-Rapide",
+  "feature_1_desc": "Pilotez l'intégralité de votre catalogue produit sans aucune latence serveur et maîtrisez votre rentabilité réelle.",
+  "feature_2_title": "Centre de Traitement des Commandes",
+  "feature_2_desc": "Ne ratez plus aucune vente. Confirmez et préparez vos commandes deux fois plus vite avec toutes les infos sous les yeux.",
+  "feature_3_title": "Expédition & Transporteurs Intégrés",
+  "feature_3_desc": "Activez le module d'expédition uniquement si vous en avez besoin et générez vos bordereaux en 1 clic."
 }
