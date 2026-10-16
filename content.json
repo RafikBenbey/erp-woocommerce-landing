@@ -1,38 +1,13 @@
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                fluent: {
-                    brand: '#0F6CBD',
-                    brandHover: '#115EA3',
-                    brandPressed: '#0C3B5E',
-                    brandTint: '#EBF3FC',
-                    bg: '#FFFFFF',
-                    canvas: '#F5F5F5',
-                    subtle: '#F0F0F0',
-                    fg1: '#242424',
-                    fg2: '#424242',
-                    fg3: '#616161',
-                    stroke1: '#D1D1D1',
-                    stroke2: '#E0E0E0',
-                }
-            },
-            fontFamily: {
-                sans: ['"Segoe UI Variable Display"', '"Segoe UI Variable Text"', '"Segoe UI"', '-apple-system', 'sans-serif'],
-                mono: ['Consolas', '"Segoe UI Mono"', 'monospace'],
-            },
-            borderRadius: {
-                fluentSm: '2px',
-                fluentMd: '4px',
-                fluentLg: '8px',
-                fluentXl: '12px',
-            },
-            boxShadow: {
-                fluent2: '0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14)',
-                fluent4: '0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14)',
-                fluent8: '0 0 2px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.14)',
-                fluent16: '0 0 2px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.14)',
-            }
-        }
-    }
+{
+  "hero_badge": "CLIENT LOURD WINDOWS (.EXE) • ZÉRO EXTENSION REQUISE SUR WORDPRESS",
+  "hero_title": "Pilotez votre catalogue et vos commandes WooCommerce sans la lenteur de WordPress.",
+  "hero_description": "Woo Relay déporte l'ensemble de vos opérations sur une base de données locale SQLite haute performance. Mettez à jour vos stocks, contrôlez vos marges réelles et éditez vos bordereaux de livraison en 0,1 seconde, sans saturer votre serveur web.",
+  "hero_image": "",
+  "cta_button": "Demander l'installateur Windows (Essai 14 jours)",
+  "feature_1_title": "Contrôle des inventaires et analyse des marges",
+  "feature_1_desc": "Édition des stocks et prix en 1 clic sans rechargement, calcul automatique de rentabilité nette basé sur vos prix d'achat, alertes de rupture et support multi-devises (DZD, EUR, USD).",
+  "feature_2_title": "Centre de traitement des commandes (OMS)",
+  "feature_2_desc": "Détection en temps réel avec signal sonore paramétrable, mise à jour instantanée des statuts WooCommerce, fiche client complète et boutons d'appel/WhatsApp en 1 clic.",
+  "feature_3_title": "Logistique & Expédition Directe (Algérie)",
+  "feature_3_desc": "Module optionnel intégrant nativement Yalidine Express (58 wilayas), ZR Express, Maystro Delivery, Procolis, avec gestion Domicile/Stop Desk, option d'ouverture du colis et bordereaux prêts à imprimer."
 }
