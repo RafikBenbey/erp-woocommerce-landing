@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Woo Relay — Application Windows Dédiée à la Gestion de Stock WooCommerce</title>
-    <meta name="description" content="Application de bureau Windows (0,1s) pour piloter votre boutique WooCommerce : inventaire en local, marges réelles et détection instantanée des commandes. Zéro plugin serveur.">
+    <title>WooRelay — Client lourd Windows pour gérer WooCommerce sans plugins</title>
+    <meta name="description" content="Oubliez la lenteur de wp-admin. Gérez vos stocks, vos prix d'achat et vos commandes WooCommerce en 0,1s depuis une application Windows locale reliée en REST API.">
     <link rel="canonical" href="https://woorelay.netlify.app/">
 
-    <!-- Open Graph SEO -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Woo Relay — Gestion de Stock & Commandes WooCommerce sur Windows">
-    <meta property="og:description" content="Déportez vos opérations WooCommerce sur une application Windows ultra-rapide (0,1s). Mises à jour de stock instantanées et marge nette sans surcharger WordPress.">
+    <meta property="og:title" content="WooRelay — Gérez WooCommerce sur Windows en 0,1s">
+    <meta property="og:description" content="Plus besoin d'ouvrir 50 onglets produits ni d'alourdir WordPress avec des plugins de stock. Un exécutable Windows rapide, branché en direct sur votre boutique.">
     <meta property="og:url" content="https://woorelay.netlify.app/">
 
-    <!-- Données structurées Schema.org -->
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Woo Relay - Gestion de Stock WooCommerce",
+      "name": "WooRelay",
       "operatingSystem": "Windows 10, Windows 11 (64-bit)",
       "applicationCategory": "BusinessApplication",
-      "description": "Application de bureau Windows pour gérer l'inventaire, les marges et les commandes WooCommerce en 0,1s sans ralentir WordPress.",
+      "description": "Application de bureau Windows sur base SQLite pour gérer les stocks, marges et commandes WooCommerce sans surcharger WordPress.",
       "fileFormat": "application/x-msdownload",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "DZD",
-        "description": "Période d'évaluation complète de 14 jours (Installateur officiel .exe)"
+        "description": "Essai complet de 14 jours (Installateur .exe)"
       }
     }
     </script>
 
-    <!-- Typographie Système & JetBrains Mono -->
+    <!-- Google Fonts : Space Grotesk + IBM Plex Sans + IBM Plex Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,30 +44,29 @@
             theme: {
                 extend: {
                     colors: {
-                        fluent: {
-                            brand: '#0F6CBD',
-                            brandHover: '#115EA3',
-                            brandPressed: '#0C3B5E',
-                            brandLight: '#EBF3FC',
-                            canvas: '#F8F9FA',
-                            card: '#FFFFFF',
-                            subtle: '#F3F4F6',
-                            fg1: '#111827',
-                            fg2: '#374151',
-                            fg3: '#6B7280',
-                            stroke1: '#E5E7EB',
-                            stroke2: '#D1D5DB',
+                        paper: '#FAF9F6',
+                        surface: '#FFFFFF',
+                        subtle: '#F3F1EC',
+                        ink: '#111111',
+                        body: '#3D3D3D',
+                        muted: '#6E6D68',
+                        line: '#E6E4DD',
+                        lineStrong: '#D5D2C8',
+                        woo: {
+                            DEFAULT: '#7F54B3',
+                            hover: '#674399',
+                            active: '#53357A',
+                            tint: '#F4EFFA'
                         }
                     },
                     fontFamily: {
-                        sans: ['"Segoe UI Variable Display"', '"Segoe UI Variable Text"', '"Segoe UI"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'Consolas', 'monospace'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        sans: ['"IBM Plex Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"IBM Plex Mono"', 'monospace'],
                     },
                     boxShadow: {
-                        fluentSubtle: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
-                        fluentCard: '0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03)',
-                        fluentElevated: '0 12px 28px -4px rgba(15, 108, 189, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
-                        fluentWindow: '0 24px 48px -12px rgba(15, 108, 189, 0.12), 0 8px 24px -4px rgba(0, 0, 0, 0.06)',
+                        soft: '0 2px 6px rgba(17, 17, 17, 0.03), 0 1px 2px rgba(17, 17, 17, 0.04)',
+                        card: '0 8px 24px rgba(17, 17, 17, 0.04), 0 1px 3px rgba(17, 17, 17, 0.03)'
                     }
                 }
             }
@@ -81,15 +80,13 @@
         html, body {
             max-width: 100%;
             overflow-x: hidden;
-            background-color: #F8F9FA;
-            color: #111827;
+            background-color: #FAF9F6;
+            color: #111111;
             -webkit-text-size-adjust: 100%;
         }
-        /* Motif trame subtile Fluent (Blueprint Grid) */
-        .fluent-grid-pattern {
-            background-size: 24px 24px;
-            background-image: 
-                radial-gradient(circle, #D1D5DB 1px, transparent 1px);
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.02em;
         }
         h1, h2, h3, h4, p, span, a, div, td, th, label, button {
             overflow-wrap: anywhere;
@@ -98,344 +95,322 @@
         .flex > * {
             min-width: 0;
         }
-        .fluent-input {
-            border: 1px solid #D1D5DB;
-            border-bottom: 2px solid #6B7280;
-            transition: all 0.15s ease-in-out;
+        .craft-input {
+            border: 1px solid #D5D2C8;
+            background-color: #FAF9F6;
+            transition: border-color 0.15s ease, background-color 0.15s ease;
             font-size: 16px;
         }
         @media (min-width: 640px) {
-            .fluent-input {
-                font-size: 0.875rem;
+            .craft-input {
+                font-size: 0.9375rem;
             }
         }
-        .fluent-input:focus {
-            border-color: #0F6CBD;
-            border-bottom-color: #0F6CBD;
-            box-shadow: 0 0 0 3px rgba(15, 108, 189, 0.15);
+        .craft-input:focus {
+            background-color: #FFFFFF;
+            border-color: #7F54B3;
             outline: none;
         }
     </style>
-
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body class="font-sans antialiased selection:bg-fluent-brandLight selection:text-fluent-brand">
+<body class="font-sans antialiased selection:bg-woo-tint selection:text-woo">
 
-    <!-- NAVIGATION FLUENT 2 (ACRYLIC BAR) -->
-    <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-fluent-stroke1 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5 min-w-0">
-                <div class="w-8 h-8 rounded-lg bg-fluent-brand flex items-center justify-center text-white font-bold text-sm shadow-sm shrink-0">
-                    WR
-                </div>
-                <div class="flex items-baseline gap-2 min-w-0 truncate">
-                    <span class="font-bold text-base tracking-tight text-fluent-fg1 truncate">Woo Relay</span>
-                    <span class="text-[11px] font-mono text-fluent-fg3 hidden sm:inline shrink-0">Pro Desktop • Win 10/11</span>
-                </div>
+    <!-- NAVIGATION -->
+    <nav class="sticky top-0 z-50 bg-paper/95 backdrop-blur-sm border-b border-line">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <a href="#" class="flex items-baseline gap-2 min-w-0">
+                <span class="font-display font-bold text-xl tracking-tight text-ink">
+                    <span class="text-woo">Woo</span>Relay
+                </span>
+                <span class="text-xs font-mono text-muted hidden sm:inline">v1.4 • x64</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-body shrink-0">
+                <a href="#constat" class="hover:text-ink transition-colors">Le problème wp-admin</a>
+                <a href="#usage" class="hover:text-ink transition-colors">Ce que fait l'outil</a>
+                <a href="#comparatif" class="hover:text-ink transition-colors">Comparatif</a>
+                <a href="#securite" class="hover:text-ink transition-colors">Architecture</a>
             </div>
 
-            <div class="hidden md:flex items-center gap-7 text-sm font-medium text-fluent-fg2 shrink-0">
-                <a href="#architecture" class="hover:text-fluent-brand transition-colors">Architecture</a>
-                <a href="#inventaire" class="hover:text-fluent-brand transition-colors">Inventaire & Marges</a>
-                <a href="#alertes" class="hover:text-fluent-brand transition-colors">Alertes Ventes</a>
-                <a href="#comparatif" class="hover:text-fluent-brand transition-colors">Comparatif</a>
-                <a href="#securite" class="hover:text-fluent-brand transition-colors">Sécurité Locale</a>
-            </div>
-
-            <div class="flex items-center gap-2 shrink-0">
-                <a href="#telecharger" class="bg-fluent-brand hover:bg-fluent-brandHover active:bg-fluent-brandPressed text-white text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-2 rounded-md shadow-fluentSubtle transition-all whitespace-nowrap">
-                    <span class="hidden sm:inline">Obtenir l'</span>installateur (.exe)
+            <div class="shrink-0">
+                <a href="#installer" class="bg-woo hover:bg-woo-hover active:bg-woo-active text-white text-xs sm:text-sm font-medium px-4 py-2.5 rounded-md transition-colors whitespace-nowrap">
+                    Télécharger (.exe)
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- SECTION HERO (LUMINEUSE AVEC LUEURS FLUIDES) -->
-    <header class="relative pt-10 pb-16 sm:pt-20 sm:pb-28 border-b border-fluent-stroke1 bg-white overflow-hidden">
-        <!-- Trame de fond et halo doux Fluent -->
-        <div class="absolute inset-0 fluent-grid-pattern opacity-40 pointer-events-none"></div>
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[380px] bg-gradient-to-b from-blue-100/60 via-blue-50/20 to-transparent pointer-events-none rounded-full blur-3xl -z-10"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
-            <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                
-                <!-- Colonne Gauche : Pitch & Appel à l'action -->
-                <div class="lg:col-span-6 space-y-5 text-left min-w-0" data-aos="fade-up">
-                    <div class="inline-flex items-center gap-2 bg-fluent-brandLight border border-blue-200/80 text-fluent-brand text-[11px] font-mono font-semibold px-2.5 py-1 rounded max-w-full">
-                        <span class="w-1.5 h-1.5 rounded-full bg-fluent-brand shrink-0"></span>
-                        <span class="truncate">APPLICATION BUREAU WINDOWS (.EXE) • ZÉRO LATENCE SERVEUR</span>
-                    </div>
-
-                    <h1 class="text-3xl sm:text-4xl lg:text-[44px] font-bold text-fluent-fg1 tracking-tight leading-tight sm:leading-[1.14]">
-                        Gérez vos stocks et commandes WooCommerce à la vitesse de votre processeur.
-                    </h1>
-
-                    <p class="text-sm sm:text-base text-fluent-fg2 leading-relaxed">
-                        Woo Relay déporte l'ensemble de vos opérations sur une base locale SQLite synchronisée. Ajustez vos stocks en un clic, surveillez vos marges nettes réelles et soyez alerté des ventes en <strong>0,1 seconde</strong>, sans charger votre serveur WordPress.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                        <a href="#telecharger" class="w-full sm:w-auto bg-fluent-brand hover:bg-fluent-brandHover active:bg-fluent-brandPressed text-white font-semibold px-6 py-3 rounded-md shadow-fluentCard hover:shadow-fluentElevated transition-all text-center text-sm">
-                            Télécharger l'installateur Windows (Essai 14 jours)
-                        </a>
-                        <a href="#inventaire" class="w-full sm:w-auto bg-white hover:bg-fluent-subtle text-fluent-fg1 font-semibold px-5 py-3 rounded-md border border-fluent-stroke2 transition-colors text-center text-sm shadow-sm">
-                            Voir le fonctionnement
-                        </a>
-                    </div>
-
-                    <!-- Métriques Clés Fluent -->
-                    <div class="pt-6 grid grid-cols-3 gap-3 border-t border-fluent-stroke1 text-left">
-                        <div class="min-w-0">
-                            <div class="font-mono font-bold text-fluent-fg1 text-lg sm:text-2xl">0,1 s</div>
-                            <div class="text-[11px] sm:text-xs text-fluent-fg3 leading-tight mt-0.5">Moteur SQLite local</div>
-                        </div>
-                        <div class="min-w-0">
-                            <div class="font-mono font-bold text-fluent-fg1 text-lg sm:text-2xl">0 plugin</div>
-                            <div class="text-[11px] sm:text-xs text-fluent-fg3 leading-tight mt-0.5">API REST native</div>
-                        </div>
-                        <div class="min-w-0">
-                            <div class="font-mono font-bold text-fluent-fg1 text-lg sm:text-2xl">100%</div>
-                            <div class="text-[11px] sm:text-xs text-fluent-fg3 leading-tight mt-0.5">Données sur votre PC</div>
-                        </div>
-                    </div>
+    <!-- HERO SECTION AÉRÉE -->
+    <header class="pt-14 pb-20 sm:pt-24 sm:pb-28 border-b border-line">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            
+            <!-- Bloc Éditorial Centré / Aéré -->
+            <div class="max-w-3xl space-y-6">
+                <div class="inline-flex items-center gap-2 bg-subtle border border-line px-3 py-1 rounded-md text-xs font-mono text-body">
+                    <span>Exécutable Windows natif</span>
+                    <span class="text-lineStrong">•</span>
+                    <span>Zéro plugin à installer sur WordPress</span>
                 </div>
 
-                <!-- Colonne Droite : Interface Windows 11 Interactive (Mica Style) -->
-                <div class="lg:col-span-6 min-w-0" data-aos="fade-up" data-aos-delay="100">
-                    
-                    <div class="bg-white rounded-xl border border-fluent-stroke2 shadow-fluentWindow overflow-hidden text-fluent-fg1 text-left ring-1 ring-black/5">
-                        <!-- Barre de titre Windows 11 Fluent -->
-                        <div class="bg-gradient-to-r from-fluent-subtle to-slate-100 px-3.5 sm:px-4 py-2.5 border-b border-fluent-stroke1 flex items-center justify-between text-xs font-mono">
-                            <div class="flex items-center gap-2 truncate">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shrink-0"></span>
-                                <span class="text-fluent-fg1 font-semibold truncate">Woo Relay Pro (x64)</span>
-                                <span class="text-fluent-fg3 hidden sm:inline">— Session Active SQLite</span>
-                            </div>
-                            <div class="flex items-center gap-2.5 text-fluent-fg3 shrink-0">
-                                <span class="bg-fluent-brandLight text-fluent-brand px-1.5 py-0.5 rounded text-[11px] font-semibold border border-blue-200/50">0,08s</span>
-                                <span>─</span>
-                                <span>□</span>
-                                <span>✕</span>
-                            </div>
-                        </div>
+                <h1 class="text-3xl sm:text-5xl font-bold text-ink leading-[1.12]">
+                    Arrêtez d'attendre 8 secondes pour modifier le stock d'un produit WooCommerce.
+                </h1>
 
-                        <!-- Corps de l'application simulée -->
-                        <div class="p-4 sm:p-5 space-y-4 bg-slate-50/60">
-                            
-                            <!-- KPIs Fluent Modernes -->
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                                <div class="bg-white p-3 rounded-lg border border-fluent-stroke1 shadow-sm">
-                                    <div class="text-[11px] text-fluent-fg3 font-medium">Commandes du Jour</div>
-                                    <div class="text-base sm:text-lg font-bold font-mono text-fluent-fg1 mt-0.5">18 <span class="text-xs text-emerald-600 font-normal">🔔 direct</span></div>
-                                </div>
-                                <div class="bg-white p-3 rounded-lg border border-fluent-stroke1 shadow-sm">
-                                    <div class="text-[11px] text-fluent-fg3 font-medium">Marge Nette Jour</div>
-                                    <div class="text-base sm:text-lg font-bold font-mono text-emerald-600 mt-0.5">+42 800 DZD</div>
-                                </div>
-                                <div class="bg-white p-3 rounded-lg border border-fluent-stroke1 shadow-sm">
-                                    <div class="text-[11px] text-fluent-fg3 font-medium">Seuil Critique</div>
-                                    <div class="text-base sm:text-lg font-bold font-mono text-amber-600 mt-0.5">2 articles</div>
-                                </div>
-                            </div>
+                <p class="text-base sm:text-lg text-body leading-relaxed max-w-2xl">
+                    Tout gérant de boutique connaît la lourdeur de la page <code class="font-mono text-sm bg-subtle px-1.5 py-0.5 rounded border border-line">Produits &gt; Tous les produits</code>. WooRelay déporte votre catalogue et vos commandes dans un logiciel Windows léger. Vous changez un stock, un prix d'achat ou un statut de commande en 0,1 seconde, sans installer une seule extension de plus sur votre serveur.
+                </p>
 
-                            <!-- Grille interactive de gestion de stock -->
-                            <div class="bg-white rounded-lg border border-fluent-stroke1 shadow-sm overflow-hidden">
-                                <div class="px-3 py-2 bg-slate-100/70 border-b border-fluent-stroke1 flex justify-between items-center text-[10px] sm:text-[11px] font-mono text-fluent-fg3">
-                                    <span>RÉFÉRENCE & TARIF HT</span>
-                                    <span>PRIX / MARGE</span>
-                                    <span>STOCK EN RAYON</span>
-                                </div>
-                                <div class="divide-y divide-fluent-stroke1 text-xs">
-                                    <!-- Produit 1 avec boutons interactifs -->
-                                    <div class="p-2.5 flex items-center justify-between gap-2">
-                                        <div class="min-w-0">
-                                            <div class="font-semibold text-fluent-fg1 truncate text-xs">Casque Bluetooth ANC Pro</div>
-                                            <div class="font-mono text-[10px] text-fluent-fg3 truncate">SKU-8841 • Coût: 4 200 DZD</div>
-                                        </div>
-                                        <div class="text-right font-mono shrink-0">
-                                            <div class="font-semibold text-fluent-fg1">6 900 DZD</div>
-                                            <div class="text-[10px] text-emerald-600 font-bold">+39% net</div>
-                                        </div>
-                                        <div class="flex items-center gap-1 font-mono shrink-0">
-                                            <button onclick="changerStock('stock-1', -1)" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border border-fluent-stroke2 rounded text-fluent-fg2 font-bold cursor-pointer transition-colors">-</button>
-                                            <span id="stock-1" class="w-8 text-center py-0.5 bg-fluent-brandLight text-fluent-brand font-bold rounded">42</span>
-                                            <button onclick="changerStock('stock-1', 1)" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border border-fluent-stroke2 rounded text-fluent-fg2 font-bold cursor-pointer transition-colors">+</button>
-                                        </div>
-                                    </div>
-                                    <!-- Produit 2 -->
-                                    <div class="p-2.5 flex items-center justify-between gap-2">
-                                        <div class="min-w-0">
-                                            <div class="font-semibold text-fluent-fg1 truncate text-xs">Montre Sport GPS Connectée</div>
-                                            <div class="font-mono text-[10px] text-fluent-fg3 truncate">SKU-3109 • Coût: 5 500 DZD</div>
-                                        </div>
-                                        <div class="text-right font-mono shrink-0">
-                                            <div class="font-semibold text-fluent-fg1">8 500 DZD</div>
-                                            <div class="text-[10px] text-emerald-600 font-bold">+35% net</div>
-                                        </div>
-                                        <div class="flex items-center gap-1 font-mono shrink-0">
-                                            <button onclick="changerStock('stock-2', -1)" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border border-fluent-stroke2 rounded text-fluent-fg2 font-bold cursor-pointer transition-colors">-</button>
-                                            <span id="stock-2" class="w-8 text-center py-0.5 bg-amber-50 text-amber-700 font-bold rounded border border-amber-200">03</span>
-                                            <button onclick="changerStock('stock-2', 1)" class="w-6 h-6 flex items-center justify-center bg-slate-100 hover:bg-slate-200 border border-fluent-stroke2 rounded text-fluent-fg2 font-bold cursor-pointer transition-colors">+</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Fiche commande avec bouton pour écouter l'alerte -->
-                            <div class="bg-white rounded-lg border border-fluent-stroke1 p-3 flex flex-wrap items-center justify-between gap-2 shadow-sm text-xs">
-                                <div class="min-w-0">
-                                    <div class="flex items-center gap-1.5 flex-wrap">
-                                        <span class="bg-fluent-brand text-white text-[10px] font-mono font-bold px-1.5 py-0.5 rounded">NOUVELLE COMMANDE #5104</span>
-                                        <span class="font-semibold text-fluent-fg1">Karim M. (2 articles)</span>
-                                    </div>
-                                    <div class="text-fluent-fg3 text-[11px] mt-0.5">Notification instantanée Windows • Synchronisation REST</div>
-                                </div>
-                                <button onclick="jouerSonAlerte()" class="inline-flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 font-semibold px-2.5 py-1 rounded text-xs transition-colors cursor-pointer">
-                                    <span>🔊</span> Tester l'alerte sonore
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
+                <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
+                    <a href="#installer" class="w-full sm:w-auto bg-woo hover:bg-woo-hover active:bg-woo-active text-white font-medium px-6 py-3.5 rounded-md transition-colors text-center text-sm sm:text-base">
+                        Obtenir l'installateur Windows (Essai 14 jours)
+                    </a>
+                    <a href="#usage" class="w-full sm:w-auto bg-surface hover:bg-subtle text-ink font-medium px-6 py-3.5 rounded-md border border-lineStrong transition-colors text-center text-sm sm:text-base">
+                        Voir l'interface en détail
+                    </a>
                 </div>
             </div>
+
+            <!-- MAQUETTE EN CODE PUR (CAS B - HAUTE DENSITÉ RÉALISTE) -->
+            <div class="mt-14 sm:mt-16 bg-surface rounded-md border border-lineStrong shadow-card overflow-hidden">
+                
+                <!-- Barre de fenêtre sobre -->
+                <div class="bg-subtle px-4 py-2.5 border-b border-line flex items-center justify-between text-xs font-mono text-muted">
+                    <div class="flex items-center gap-3 truncate">
+                        <span class="font-semibold text-ink">WooRelay.exe</span>
+                        <span class="text-lineStrong">|</span>
+                        <span class="truncate">Base locale : catalog_cache.sqlite (Synchronisé via REST API v3)</span>
+                    </div>
+                    <div class="flex items-center gap-4 shrink-0">
+                        <span class="text-emerald-700 font-medium">● Lecture locale : 0,08s</span>
+                        <span class="hidden sm:inline text-muted">─  □  ✕</span>
+                    </div>
+                </div>
+
+                <!-- Barre d'outils interne du logiciel -->
+                <div class="p-4 sm:px-6 bg-paper border-b border-line flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-2 text-xs font-mono">
+                        <span class="bg-surface border border-lineStrong px-3 py-1.5 rounded text-ink font-medium">Catalogue (1 420 réf.)</span>
+                        <span class="px-3 py-1.5 text-muted">Commandes du jour (18)</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="jouerCarillon()" class="bg-surface hover:bg-subtle text-ink border border-lineStrong px-3 py-1.5 rounded text-xs font-mono transition-colors cursor-pointer">
+                            🔊 Écouter le signal de nouvelle commande
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grille de données (Vrai rendu tableur métier) -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[680px]">
+                        <thead>
+                            <tr class="border-b border-line bg-surface text-[11px] font-mono uppercase text-muted">
+                                <th class="py-3 px-4 sm:px-6 font-medium">SKU</th>
+                                <th class="py-3 px-4 font-medium">Désignation produit (post_title)</th>
+                                <th class="py-3 px-4 font-medium text-right">Coût d'achat</th>
+                                <th class="py-3 px-4 font-medium text-right">Prix WooCommerce</th>
+                                <th class="py-3 px-4 font-medium text-right">Marge nette</th>
+                                <th class="py-3 px-4 sm:px-6 font-medium text-right">Stock (_stock)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-line text-sm">
+                            <!-- Ligne 1 -->
+                            <tr class="hover:bg-paper/60 transition-colors">
+                                <td class="py-3.5 px-4 sm:px-6 font-mono text-xs text-muted">REF-8841</td>
+                                <td class="py-3.5 px-4 font-medium text-ink">Casque Audio Fermé Studio</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right text-muted">4 200 DZD</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right font-medium text-ink">6 900 DZD</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right text-emerald-700 font-medium">+2 700 DZD (39%)</td>
+                                <td class="py-3.5 px-4 sm:px-6 text-right">
+                                    <div class="inline-flex items-center gap-1.5 font-mono text-xs">
+                                        <button onclick="ajusterStock('s1', -1)" class="w-6 h-6 bg-subtle hover:bg-line border border-lineStrong rounded text-ink cursor-pointer">-</button>
+                                        <span id="s1" class="w-9 text-center py-0.5 bg-surface border border-line rounded font-semibold text-ink">42</span>
+                                        <button onclick="ajusterStock('s1', 1)" class="w-6 h-6 bg-subtle hover:bg-line border border-lineStrong rounded text-ink cursor-pointer">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Ligne 2 -->
+                            <tr class="hover:bg-paper/60 transition-colors">
+                                <td class="py-3.5 px-4 sm:px-6 font-mono text-xs text-muted">REF-3109</td>
+                                <td class="py-3.5 px-4 font-medium text-ink">Clavier Mécanique ISO-FR</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right text-muted">5 500 DZD</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right font-medium text-ink">8 500 DZD</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right text-emerald-700 font-medium">+3 000 DZD (35%)</td>
+                                <td class="py-3.5 px-4 sm:px-6 text-right">
+                                    <div class="inline-flex items-center gap-1.5 font-mono text-xs">
+                                        <button onclick="ajusterStock('s2', -1)" class="w-6 h-6 bg-subtle hover:bg-line border border-lineStrong rounded text-ink cursor-pointer">-</button>
+                                        <span id="s2" class="w-9 text-center py-0.5 bg-amber-50 border border-amber-300 rounded font-semibold text-amber-900">03</span>
+                                        <button onclick="ajusterStock('s2', 1)" class="w-6 h-6 bg-subtle hover:bg-line border border-lineStrong rounded text-ink cursor-pointer">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Ligne 3 -->
+                            <tr class="hover:bg-paper/60 transition-colors">
+                                <td class="py-3.5 px-4 sm:px-6 font-mono text-xs text-muted">REF-1044</td>
+                                <td class="py-3.5 px-4 font-medium text-ink">Support Écran Articulé Aluminium</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right text-muted">3 100 DZD</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right font-medium text-ink">5 400 DZD</td>
+                                <td class="py-3.5 px-4 font-mono text-xs text-right text-emerald-700 font-medium">+2 300 DZD (42%)</td>
+                                <td class="py-3.5 px-4 sm:px-6 text-right">
+                                    <div class="inline-flex items-center gap-1.5 font-mono text-xs">
+                                        <button onclick="ajusterStock('s3', -1)" class="w-6 h-6 bg-subtle hover:bg-line border border-lineStrong rounded text-ink cursor-pointer">-</button>
+                                        <span id="s3" class="w-9 text-center py-0.5 bg-surface border border-line rounded font-semibold text-ink">19</span>
+                                        <button onclick="ajusterStock('s3', 1)" class="w-6 h-6 bg-subtle hover:bg-line border border-lineStrong rounded text-ink cursor-pointer">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pied de fenêtre (Barre d'état) -->
+                <div class="bg-subtle px-4 sm:px-6 py-2.5 border-t border-line flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-muted">
+                    <span>Cliquez sur + ou - ci-dessus : dans WooRelay, la modification part en tâche de fond sans figer votre écran.</span>
+                    <span>Charge MySQL ajoutée : 0%</span>
+                </div>
+            </div>
+
         </div>
     </header>
 
-    <!-- SECTION 1 : COMPARAISON D'ARCHITECTURE -->
-    <section id="architecture" class="py-14 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="max-w-3xl mx-auto text-center mb-10 sm:mb-16" data-aos="fade-up">
-            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Rupture Technologique</span>
-            <h2 class="text-2xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
-                Ne saturez plus votre serveur web avec vos opérations quotidiennes
-            </h2>
-            <p class="text-fluent-fg2 mt-3 text-sm sm:text-base leading-relaxed">
-                Chaque actualisation de stock ou consultation de commande sur l'admin WordPress déclenche des dizaines de requêtes MySQL qui ralentissent la navigation de vos vrais clients en ligne. Woo Relay isole la gestion sur votre PC.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6 items-stretch">
-            <!-- Panneau WordPress Natif -->
-            <div class="bg-white p-6 sm:p-8 rounded-xl border border-rose-200 shadow-sm min-w-0 relative overflow-hidden" data-aos="fade-up">
-                <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded border border-rose-200 mb-4">
-                    ✕ BACK-OFFICE WORDPRESS CLASSIQUE
-                </div>
-                <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1 mb-3">Lenteur inhérente et surcharge mémoire</h3>
-                <ul class="space-y-3 text-xs sm:text-sm text-fluent-fg2">
-                    <li class="flex items-start gap-2.5"><span class="text-rose-500 font-bold shrink-0">•</span> 5 à 10 secondes de chargement pour chaque vue de commande ou fiche article.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-rose-500 font-bold shrink-0">•</span> Aucune visibilité sur les coûts d'achat et la marge nette sans plugins payants.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-rose-500 font-bold shrink-0">•</span> Notifications de vente dépendantes des e-mails SMTP (retards et courriers indésirables).</li>
-                    <li class="flex items-start gap-2.5"><span class="text-rose-500 font-bold shrink-0">•</span> Risque régulier de blocage serveur lors des modifications d'inventaire en période de pointe.</li>
-                </ul>
+    <!-- SECTION 1 : LE CONSTAT PRAGMATIQUE -->
+    <section id="constat" class="py-20 sm:py-28 max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+            <div class="lg:col-span-5 space-y-4">
+                <span class="text-xs font-mono uppercase tracking-wider text-woo font-medium">Le vrai problème</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink leading-snug">
+                    La fiche produit WordPress est faite pour publier, pas pour gérer un stock toute la journée.
+                </h2>
             </div>
+            <div class="lg:col-span-7 space-y-6 text-body text-base leading-relaxed">
+                <p>
+                    Quand vous gérez une boutique active, chaque action dans <code class="font-mono text-xs bg-subtle px-1.5 py-0.5 rounded border border-line">/wp-admin/</code> déclenche le chargement complet de WordPress, de votre thème et de vos 25 extensions actives. Modifier dix quantités à la suite ou vérifier le détail d'une commande devient vite une corvée.
+                </p>
+                <p>
+                    Pire : pour connaître votre bénéfice net réel ou éditer en masse, on vous pousse à installer des plugins supplémentaires (« Cost of Goods », « Bulk Stock Manager ») qui rajoutent des tables dans votre base de données et ralentissent le chargement côté client.
+                </p>
 
-            <!-- Panneau Woo Relay Fluent -->
-            <div class="bg-white p-6 sm:p-8 rounded-xl border border-fluent-brand/40 shadow-fluentElevated min-w-0 relative overflow-hidden ring-1 ring-fluent-brand/10" data-aos="fade-up" data-aos-delay="100">
-                <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-fluent-brand bg-fluent-brandLight px-2.5 py-1 rounded border border-blue-200 mb-4">
-                    ✓ APPLICATION DESKTOP WOO RELAY
+                <div class="grid sm:grid-cols-2 gap-5 pt-4">
+                    <div class="bg-surface p-6 rounded-md border border-line shadow-soft">
+                        <div class="font-mono text-xs text-muted mb-2">SUR VOTRE SERVEUR WEB</div>
+                        <div class="font-display font-bold text-lg text-ink mb-2">Aucun plugin à installer</div>
+                        <p class="text-sm text-body">
+                            Votre WordPress reste propre. WooRelay se branche simplement avec une clé API REST standard (lecture/écriture) générée dans les réglages natifs de WooCommerce.
+                        </p>
+                    </div>
+                    <div class="bg-surface p-6 rounded-md border border-line shadow-soft">
+                        <div class="font-mono text-xs text-muted mb-2">SUR VOTRE POSTE WINDOWS</div>
+                        <div class="font-display font-bold text-lg text-ink mb-2">Base SQLite instantanée</div>
+                        <p class="text-sm text-body">
+                            Tout votre catalogue est mis en cache sur votre disque dur. Filtrer 3 000 références ou ajuster un prix se fait à la vitesse d'un logiciel local.
+                        </p>
+                    </div>
                 </div>
-                <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1 mb-3">Moteur local SQLite ultra-rapide (0,1s)</h3>
-                <ul class="space-y-3 text-xs sm:text-sm text-fluent-fg2">
-                    <li class="flex items-start gap-2.5"><span class="text-fluent-brand font-bold shrink-0">✓</span> Réponse instantanée à chaque frappe : lecture et écriture locales synchronisées.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-fluent-brand font-bold shrink-0">✓</span> Indicateur de marge nette intégrée sur chaque produit pour piloter la rentabilité réelle.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-fluent-brand font-bold shrink-0">✓</span> Carillon sonore immédiat et discret sur Windows dès qu'une commande est validée.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-fluent-brand font-bold shrink-0">✓</span> 0 plugin WordPress nécessaire : l'application utilise l'API REST officielle sécurisée.</li>
-                </ul>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2 : LES 2 PILIERS FONCTIONNELS -->
-    <section id="inventaire" class="py-14 sm:py-24 bg-white border-y border-fluent-stroke1">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="max-w-3xl mb-12 sm:mb-16" data-aos="fade-up">
-                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Fonctionnalités Métier</span>
-                <h2 class="text-2xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
-                    Deux modules pensés pour le confort des gérants de boutiques
+    <!-- SECTION 2 : FONCTIONNALITÉS CONCRÈTES -->
+    <section id="usage" class="py-20 sm:py-28 bg-surface border-y border-line">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="max-w-2xl mb-14">
+                <span class="text-xs font-mono uppercase tracking-wider text-woo font-medium">Au quotidien</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-ink mt-2">
+                    Uniquement ce dont vous avez besoin pour piloter la boutique. Rien de superflu.
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Module Inventaire -->
-                <div class="bg-slate-50/70 p-6 sm:p-8 rounded-xl border border-fluent-stroke1 shadow-sm min-w-0" data-aos="fade-up">
-                    <div class="w-10 h-10 rounded-lg bg-fluent-brand text-white flex items-center justify-center font-mono font-bold text-sm mb-4 shadow-sm">
-                        01
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Pilier 1 -->
+                <div class="bg-paper p-7 rounded-md border border-line flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs text-muted">01 / INVENTAIRE</span>
+                        <h3 class="text-xl font-bold text-ink mt-2 mb-3">Modification directe des stocks et des prix</h3>
+                        <p class="text-sm text-body leading-relaxed mb-6">
+                            Plus besoin d'entrer dans chaque fiche produit, de descendre dans l'onglet « Inventaire » et de cliquer sur « Mettre à jour ».
+                        </p>
                     </div>
-                    <span class="text-xs font-mono text-fluent-brand font-semibold">MODULE A • INVENTAIRE & RENTABILITÉ</span>
-                    <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1 mt-1 mb-2">Ajustement des stocks et calcul des marges nettes</h3>
-                    <p class="text-xs sm:text-sm text-fluent-fg2 mb-4 leading-relaxed">
-                        Fini d'ouvrir la fiche d'un produit, d'attendre 8 secondes, de sauvegarder et d'attendre encore. Modifiez vos quantités directement dans une vue tabulaire continue.
-                    </p>
-                    <ul class="space-y-2.5 text-xs sm:text-sm text-fluent-fg2 border-t border-fluent-stroke1 pt-4">
-                        <li><strong>• Édition ultra-rapide :</strong> Ajustez le stock via raccourcis clavier ou boutons instantanés.</li>
-                        <li><strong>• Saisie des prix de revient :</strong> Indiquez vos coûts fournisseurs en toute confidentialité sur votre PC.</li>
-                        <li><strong>• Seuils de réapprovisionnement :</strong> Repérez en rouge ou ambre les produits en sous-effectif.</li>
-                        <li><strong>• Recherche instantanée :</strong> Filtrez 5 000 références par SKU, nom ou statut en moins de 10 millisecondes.</li>
+                    <ul class="space-y-2.5 text-xs font-mono text-body border-t border-line pt-4">
+                        <li>• Recherche par SKU ou titre en temps réel</li>
+                        <li>• Modification des quantités à la volée</li>
+                        <li>• Repérage immédiat des stocks faibles</li>
                     </ul>
                 </div>
 
-                <!-- Module OMS / Commandes -->
-                <div id="alertes" class="bg-slate-50/70 p-6 sm:p-8 rounded-xl border border-fluent-stroke1 shadow-sm min-w-0" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-10 h-10 rounded-lg bg-fluent-brand text-white flex items-center justify-center font-mono font-bold text-sm mb-4 shadow-sm">
-                        02
+                <!-- Pilier 2 -->
+                <div class="bg-paper p-7 rounded-md border border-line flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs text-muted">02 / RENTABILITÉ</span>
+                        <h3 class="text-xl font-bold text-ink mt-2 mb-3">Prix d'achat et calcul de marge en local</h3>
+                        <p class="text-sm text-body leading-relaxed mb-6">
+                            Renseignez vos coûts d'achat fournisseurs dans WooRelay. Ces chiffres restent sur votre PC (jamais envoyés sur WordPress) et calculent votre vraie marge nette.
+                        </p>
                     </div>
-                    <span class="text-xs font-mono text-fluent-brand font-semibold">MODULE B • ORDER MANAGEMENT (OMS)</span>
-                    <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1 mt-1 mb-2">Suivi des commandes en temps réel & alerte sonore</h3>
-                    <p class="text-xs sm:text-sm text-fluent-fg2 mb-4 leading-relaxed">
-                        Ne manquez plus aucune vente et réduisez le délai de confirmation client sans garder un onglet de navigateur ouvert en permanence.
-                    </p>
-                    <ul class="space-y-2.5 text-xs sm:text-sm text-fluent-fg2 border-t border-fluent-stroke1 pt-4">
-                        <li><strong>• Alerte sonore Windows :</strong> Un carillon élégant vous informe instantanément de chaque nouvelle commande.</li>
-                        <li><strong>• Statut de commande en 1 clic :</strong> Passez d'<em>En attente</em> à <em>Terminée</em> d'un simple clic droit.</li>
-                        <li><strong>• Fiche client claire :</strong> Accédez au détail des articles, à l'adresse et aux remarques client immédiatement.</li>
-                        <li><strong>• Contact WhatsApp direct :</strong> Démarrez une conversation de confirmation avec le client en un clic.</li>
+                    <ul class="space-y-2.5 text-xs font-mono text-body border-t border-line pt-4">
+                        <li>• Coût de revient stocké uniquement sur PC</li>
+                        <li>• Calcul automatique du bénéfice par article</li>
+                        <li>• Total de la marge nette générée chaque jour</li>
+                    </ul>
+                </div>
+
+                <!-- Pilier 3 -->
+                <div class="bg-paper p-7 rounded-md border border-line flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs text-muted">03 / COMMANDES</span>
+                        <h3 class="text-xl font-bold text-ink mt-2 mb-3">Alerte sonore et suivi des ventes</h3>
+                        <p class="text-sm text-body leading-relaxed mb-6">
+                            Fini les e-mails de nouvelles commandes qui arrivent 20 minutes en retard ou tombent dans les spams. Votre ordinateur vous prévient dès qu'un client valide son panier.
+                        </p>
+                    </div>
+                    <ul class="space-y-2.5 text-xs font-mono text-body border-t border-line pt-4">
+                        <li>• Signal sonore discret sur Windows</li>
+                        <li>• Changement de statut (En cours / Terminée)</li>
+                        <li>• Coordonnées client et appel WhatsApp en 1 clic</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3 : TABLEAU COMPARATIF DÉTAILLÉ -->
-    <section id="comparatif" class="py-14 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-8 sm:mb-14" data-aos="fade-up">
-            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Comparatif Direct</span>
-            <h2 class="text-2xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
-                Back-office classique vs Woo Relay Desktop
+    <!-- SECTION 3 : TABLEAU COMPARATIF FRANC -->
+    <section id="comparatif" class="py-20 sm:py-28 max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="mb-10">
+            <span class="text-xs font-mono uppercase tracking-wider text-woo font-medium">Comparaison</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-2">
+                Back-office WordPress vs WooRelay
             </h2>
-            <p class="text-xs text-fluent-fg3 mt-1.5 sm:hidden">Glissez vers la droite pour visualiser l'ensemble du tableau →</p>
+            <p class="text-xs text-muted mt-1 sm:hidden">Faites glisser le tableau horizontalement →</p>
         </div>
 
-        <div class="bg-white rounded-xl border border-fluent-stroke1 shadow-fluentCard overflow-hidden" data-aos="fade-up">
+        <div class="bg-surface rounded-md border border-lineStrong shadow-soft overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse min-w-[550px]">
+                <table class="w-full text-left border-collapse min-w-[540px]">
                     <thead>
-                        <tr class="bg-slate-50 text-fluent-fg1 text-xs font-mono uppercase border-b border-fluent-stroke1">
-                            <th class="py-4 px-4 sm:px-6">Critère</th>
-                            <th class="py-4 px-4 sm:px-6 text-fluent-fg2">Administration WordPress native</th>
-                            <th class="py-4 px-4 sm:px-6 text-fluent-brand font-bold bg-fluent-brandLight/50">Woo Relay Windows Desktop</th>
+                        <tr class="bg-subtle border-b border-lineStrong text-xs font-mono uppercase text-muted">
+                            <th class="py-4 px-5">Action quotidienne</th>
+                            <th class="py-4 px-5">Dans wp-admin (ou via plugin)</th>
+                            <th class="py-4 px-5 text-ink font-semibold bg-woo-tint/50">Avec WooRelay sur Windows</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-fluent-stroke1 text-xs sm:text-sm">
+                    <tbody class="divide-y divide-line text-sm">
                         <tr>
-                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Vitesse d'affichage</td>
-                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Lente (5 à 10s par vue serveur)</td>
-                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandLight/20">0,1 seconde (Moteur SQLite local)</td>
+                            <td class="py-4 px-5 font-medium text-ink">Chercher un produit et changer son stock</td>
+                            <td class="py-4 px-5 text-body">6 à 12 secondes (rechargement PHP)</td>
+                            <td class="py-4 px-5 font-mono text-xs font-semibold text-ink bg-woo-tint/20">0,1 seconde (grille locale)</td>
                         </tr>
                         <tr>
-                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Alerte nouvelle vente</td>
-                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">E-mails lents ou bloqués en spam</td>
-                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandLight/20">Signal sonore & notification bureau directes</td>
+                            <td class="py-4 px-5 font-medium text-ink">Suivre ses prix d'achat et sa marge</td>
+                            <td class="py-4 px-5 text-body">Plugin payant + colonnes SQL lourdes</td>
+                            <td class="py-4 px-5 font-mono text-xs font-semibold text-ink bg-woo-tint/20">Intégré en local, 100% privé</td>
                         </tr>
                         <tr>
-                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Calcul de marge nette</td>
-                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Non géré en standard (plugins payants)</td>
-                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandLight/20">Inclus en temps réel sur chaque référence</td>
+                            <td class="py-4 px-5 font-medium text-ink">Être averti d'une nouvelle commande</td>
+                            <td class="py-4 px-5 text-body">Dépend des e-mails SMTP ou onglet ouvert</td>
+                            <td class="py-4 px-5 font-mono text-xs font-semibold text-ink bg-woo-tint/20">Carillon Windows instantané</td>
                         </tr>
                         <tr>
-                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Charge sur votre hébergement</td>
-                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Monopolise les ressources PHP et MySQL</td>
-                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandLight/20">Zéro plugin requis, aucune charge ajoutée</td>
+                            <td class="py-4 px-5 font-medium text-ink">Poids sur l'hébergement web</td>
+                            <td class="py-4 px-5 text-body">Ralentit le serveur à chaque requête admin</td>
+                            <td class="py-4 px-5 font-mono text-xs font-semibold text-ink bg-woo-tint/20">Aucun plugin installé sur le site</td>
                         </tr>
                     </tbody>
                 </table>
@@ -443,170 +418,142 @@
         </div>
     </section>
 
-    <!-- SECTION 4 : CYBERSÉCURITÉ ET DONNÉES LOCALES -->
-    <section id="securite" class="py-14 sm:py-24 bg-white border-t border-fluent-stroke1">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="max-w-3xl mb-10 sm:mb-14" data-aos="fade-up">
-                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Sécurité de Niveau Entreprise</span>
-                <h2 class="text-2xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
-                    Vos données commerciales restent confinées sur votre PC
+    <!-- SECTION 4 : SÉCURITÉ & ARCHITECTURE LOCALE -->
+    <section id="securite" class="py-20 sm:py-24 bg-surface border-t border-line">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="max-w-2xl mb-12">
+                <span class="text-xs font-mono uppercase tracking-wider text-woo font-medium">Confidentialité</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink mt-2">
+                    Vos chiffres restent sur votre machine.
                 </h2>
-                <p class="text-fluent-fg2 mt-2 text-xs sm:text-sm">
-                    Aucun intermédiaire dans le cloud ne lit vos coûts de revient, vos volumes de ventes ou vos clés WooCommerce.
+                <p class="text-sm sm:text-base text-body mt-2">
+                    Contrairement aux plateformes SaaS qui aspirent votre catalogue sur leurs serveurs, WooRelay dialogue directement entre votre PC et votre hébergement WooCommerce.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                <div class="bg-slate-50/70 p-5 rounded-lg border border-fluent-stroke1 shadow-sm" data-aos="fade-up">
-                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">AES-256-GCM</div>
-                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Clés API Chiffrées</h3>
-                    <p class="text-xs text-fluent-fg2">Vos identifiants WooCommerce sont verrouillés en local sur votre disque dur et jamais transmis ailleurs.</p>
+            <div class="grid sm:grid-cols-3 gap-6">
+                <div class="p-6 bg-paper rounded-md border border-line">
+                    <div class="font-mono text-xs font-semibold text-woo mb-1.5">AES-256-GCM</div>
+                    <h3 class="font-bold text-base text-ink mb-1.5">Clés API chiffrées sur disque</h3>
+                    <p class="text-xs sm:text-sm text-body leading-relaxed">
+                        Votre clé Consumer Key et Consumer Secret WooCommerce sont chiffrées sur votre poste Windows et ne transitent par aucun serveur tiers.
+                    </p>
                 </div>
-                <div class="bg-slate-50/70 p-5 rounded-lg border border-fluent-stroke1 shadow-sm" data-aos="fade-up" data-aos-delay="50">
-                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">127.0.0.1</div>
-                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Boucle Locale Sécurisée</h3>
-                    <p class="text-xs text-fluent-fg2">L'application fonctionne en circuit fermé avec un jeton de session renouvelé à chaque lancement.</p>
+                <div class="p-6 bg-paper rounded-md border border-line">
+                    <div class="font-mono text-xs font-semibold text-woo mb-1.5">127.0.0.1</div>
+                    <h3 class="font-bold text-base text-ink mb-1.5">Exécution strictement locale</h3>
+                    <p class="text-xs sm:text-sm text-body leading-relaxed">
+                        Vos coûts fournisseurs et vos marges sont enregistrés dans votre base locale SQLite. Personne n'y a accès, pas même les autres administrateurs de votre WordPress.
+                    </p>
                 </div>
-                <div class="bg-slate-50/70 p-5 rounded-lg border border-fluent-stroke1 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">BYTECODE V8 (.JSC)</div>
-                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Exécutable Protégé</h3>
-                    <p class="text-xs text-fluent-fg2">Le code interne de l'application est compilé en format binaire contre toute altération externe.</p>
-                </div>
-                <div class="bg-slate-50/70 p-5 rounded-lg border border-fluent-stroke1 shadow-sm" data-aos="fade-up" data-aos-delay="150">
-                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">ED25519</div>
-                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Licence Matérielle</h3>
-                    <p class="text-xs text-fluent-fg2">Contrôle cryptographique asymétrique lié à l'empreinte matérielle unique de votre machine Windows.</p>
+                <div class="p-6 bg-paper rounded-md border border-line">
+                    <div class="font-mono text-xs font-semibold text-woo mb-1.5">WINDOWS 10 & 11 (x64)</div>
+                    <h3 class="font-bold text-base text-ink mb-1.5">Installateur propre</h3>
+                    <p class="text-xs sm:text-sm text-body leading-relaxed">
+                        Un exécutable Windows standard qui s'installe et se désinstalle proprement, sans modifier la configuration de votre boutique en ligne.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 5 : TÉLÉCHARGEMENT & FORMULAIRE DIRECT -->
-    <section id="telecharger" class="py-14 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+    <!-- SECTION 5 : FORMULAIRE D'ESSAI (SANS PRÉ-REMPLISSAGE FICTIF) -->
+    <section id="installer" class="py-20 sm:py-28 max-w-5xl mx-auto px-4 sm:px-6 border-t border-line">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             
-            <div class="lg:col-span-6 space-y-4 sm:space-y-5 min-w-0" data-aos="fade-up">
-                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Distribution Directe</span>
-                <h2 class="text-2xl sm:text-3xl font-bold text-fluent-fg1">
-                    Obtenir l'installateur officiel Windows (.exe)
+            <div class="lg:col-span-6 space-y-4">
+                <span class="text-xs font-mono uppercase tracking-wider text-woo font-medium">Essai gratuit 14 jours</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-ink">
+                    Tester WooRelay sur votre boutique
                 </h2>
-                <p class="text-fluent-fg2 text-xs sm:text-sm leading-relaxed">
-                    Woo Relay est fourni sous forme d'application 64-bit propre pour Windows 10 et 11. Vous bénéficiez d'une <strong>période d'évaluation complète de 14 jours</strong> sans aucun engagement pour tester la vitesse sur votre catalogue réel.
+                <p class="text-sm sm:text-base text-body leading-relaxed">
+                    Laissez votre contact ci-contre pour recevoir l'installateur Windows (<code class="font-mono text-xs">.exe</code>) et votre clé d'activation temporaire de 14 jours.
                 </p>
-
-                <div class="space-y-3 pt-2">
-                    <div class="bg-white p-4 rounded-lg border border-fluent-stroke1 shadow-sm flex items-start gap-3 min-w-0">
-                        <span class="font-mono text-[10px] font-bold bg-fluent-brandLight text-fluent-brand px-2 py-1 rounded border border-blue-200 shrink-0">.EXE (x64)</span>
-                        <div class="min-w-0">
-                            <h4 class="font-bold text-xs sm:text-sm text-fluent-fg1">Installateur natif Windows 10 & 11</h4>
-                            <p class="text-[11px] sm:text-xs text-fluent-fg3 mt-0.5">Application 64-bit propre, sans configuration complexe sur votre serveur.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-4 rounded-lg border border-fluent-stroke1 shadow-sm flex items-start gap-3 min-w-0">
-                        <span class="font-mono text-[10px] font-bold bg-emerald-50 text-emerald-800 px-2 py-1 rounded border border-emerald-200 shrink-0">14 JOURS</span>
-                        <div class="min-w-0">
-                            <h4 class="font-bold text-xs sm:text-sm text-fluent-fg1">Évaluation complète sans frais</h4>
-                            <p class="text-[11px] sm:text-xs text-fluent-fg3 mt-0.5">Vérifiez le confort au quotidien sur votre boutique avant de choisir une licence.</p>
-                        </div>
-                    </div>
+                <div class="pt-3 space-y-2 text-xs font-mono text-muted">
+                    <div>✓ Compatible Windows 10 et Windows 11 (64-bit)</div>
+                    <div>✓ Connexion en 2 minutes via clé REST WooCommerce</div>
+                    <div>✓ Aucun engagement, aucune carte bancaire</div>
                 </div>
             </div>
 
-            <!-- Formulaire Netlify Forms -->
-            <div class="lg:col-span-6 bg-white p-6 sm:p-8 rounded-xl border border-fluent-stroke1 shadow-fluentElevated min-w-0 ring-1 ring-black/5" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1">Demander votre accès</h3>
-                <p class="text-xs text-fluent-fg3 mt-1 mb-5">
-                    Indiquez vos coordonnées pour recevoir l'installateur officiel et bénéficier d'une assistance directe pour la première synchronisation.
-                </p>
-
-                <form name="contact-woo-relay" method="POST" data-netlify="true" class="space-y-4">
+            <div class="lg:col-span-6 bg-surface p-6 sm:p-8 rounded-md border border-lineStrong shadow-card">
+                <form name="contact-woo-relay" method="POST" data-netlify="true" class="space-y-5">
                     <input type="hidden" name="form-name" value="contact-woo-relay" />
 
                     <div>
-                        <label class="block text-xs font-semibold text-fluent-fg2 mb-1">Nom complet *</label>
-                        <input type="text" name="nom" required class="fluent-input w-full bg-white rounded px-3 py-2 text-fluent-fg1" placeholder="Ex: Karim Benali" />
+                        <label for="champ-contact" class="block text-xs font-mono uppercase text-body font-medium mb-2">
+                            Numéro WhatsApp ou Téléphone *
+                        </label>
+                        <input id="champ-contact" type="tel" name="telephone" required autocomplete="tel" class="craft-input w-full rounded px-3.5 py-2.5 text-ink" />
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-fluent-fg2 mb-1">Numéro WhatsApp ou Téléphone *</label>
-                        <input type="tel" name="telephone" required class="fluent-input w-full bg-white rounded px-3 py-2 text-fluent-fg1" placeholder="05XX XX XX XX" />
+                        <label for="champ-url" class="block text-xs font-mono uppercase text-body font-medium mb-2">
+                            URL de votre boutique WooCommerce (optionnel)
+                        </label>
+                        <input id="champ-url" type="text" name="boutique_url" autocomplete="url" class="craft-input w-full rounded px-3.5 py-2.5 text-ink" />
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-fluent-fg2 mb-1">Adresse de votre boutique WooCommerce (Optionnel)</label>
-                        <input type="text" name="boutique_url" class="fluent-input w-full bg-white rounded px-3 py-2 text-fluent-fg1" placeholder="https://maboutique.com" />
+                        <label for="champ-email" class="block text-xs font-mono uppercase text-body font-medium mb-2">
+                            Adresse e-mail (optionnel)
+                        </label>
+                        <input id="champ-email" type="email" name="email" autocomplete="email" class="craft-input w-full rounded px-3.5 py-2.5 text-ink" />
                     </div>
 
-                    <button type="submit" class="w-full bg-fluent-brand hover:bg-fluent-brandHover active:bg-fluent-brandPressed text-white font-semibold py-3 rounded-md transition-all shadow-fluentCard hover:shadow-fluentElevated text-sm cursor-pointer mt-2">
+                    <button type="submit" class="w-full bg-woo hover:bg-woo-hover active:bg-woo-active text-white font-medium py-3.5 px-6 rounded-md transition-colors text-sm sm:text-base cursor-pointer">
                         Recevoir l'installateur Windows (.exe)
                     </button>
-
-                    <p class="text-[11px] text-center text-fluent-fg3 pt-1">
-                        🔒 Compatible Windows 10 & 11 (64-bit). Aucune information sensible demandée.
-                    </p>
                 </form>
             </div>
 
         </div>
     </section>
 
-    <!-- PIED DE PAGE -->
-    <footer class="bg-white border-t border-fluent-stroke1 py-8 text-xs text-fluent-fg3">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-            <div>
-                <span class="font-bold text-fluent-fg1">Woo Relay</span> — Gestion de Stock & Commandes WooCommerce (Édition Pro)
+    <!-- FOOTER -->
+    <footer class="bg-paper border-t border-line py-10 text-xs text-muted">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="font-display font-bold text-sm text-ink">
+                <span class="text-woo">Woo</span>Relay
             </div>
-            <div class="font-mono text-[11px]">
-                Exécutable Windows x64 (.exe) • Moteur SQLite Local
+            <div class="font-mono">
+                Client lourd Windows pour WooCommerce • Moteur local SQLite
             </div>
         </div>
     </footer>
 
-    <!-- SCRIPTS : Animations & Interactions Audio/Stock -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- SCRIPTS MINIMALISTES (INTERACTION TABLEAU & SON) -->
     <script>
-        AOS.init({ duration: 500, once: true });
-
-        // Ajustement interactif des stocks dans la maquette
-        function changerStock(id, diff) {
-            const el = document.getElementById(id);
+        function ajusterStock(id, delta) {
+            var el = document.getElementById(id);
             if (!el) return;
-            let val = parseInt(el.innerText, 10) + diff;
-            if (val < 0) val = 0;
-            el.innerText = val < 10 ? '0' + val : val;
+            var actuel = parseInt(el.innerText, 10) || 0;
+            var nouveau = Math.max(0, actuel + delta);
+            el.innerText = nouveau < 10 ? '0' + nouveau : nouveau;
         }
 
-        // Synthétiseur sonore de carillon Windows 11 via Web Audio API (sans fichier externe)
-        function jouerSonAlerte() {
+        function jouerCarillon() {
             try {
-                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                var AudioCtx = window.AudioContext || window.webkitAudioContext;
                 if (!AudioCtx) return;
-                const ctx = new AudioCtx();
+                var ctx = new AudioCtx();
+                var notes = [523.25, 659.25];
+                var delais = [0, 0.11];
 
-                const notes = [587.33, 880.00]; // Ré5, La5 (carillon propre bicolore)
-                const times = [0, 0.12];
-
-                notes.forEach((freq, idx) => {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-
+                notes.forEach(function(freq, i) {
+                    var osc = ctx.createOscillator();
+                    var gain = ctx.createGain();
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, ctx.currentTime + times[idx]);
-
-                    gain.gain.setValueAtTime(0, ctx.currentTime + times[idx]);
-                    gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + times[idx] + 0.02);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + times[idx] + 0.45);
-
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + delais[i]);
+                    gain.gain.setValueAtTime(0, ctx.currentTime + delais[i]);
+                    gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + delais[i] + 0.015);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + delais[i] + 0.4);
                     osc.connect(gain);
                     gain.connect(ctx.destination);
-
-                    osc.start(ctx.currentTime + times[idx]);
-                    osc.stop(ctx.currentTime + times[idx] + 0.5);
+                    osc.start(ctx.currentTime + delais[i]);
+                    osc.stop(ctx.currentTime + delais[i] + 0.45);
                 });
-            } catch (e) {
-                console.log('Audio non disponible');
-            }
+            } catch (e) {}
         }
     </script>
 </body>
