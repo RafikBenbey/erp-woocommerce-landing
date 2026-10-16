@@ -590,3 +590,64 @@
 
                     <button type="submit" class="w-full bg-fluent-brand hover:bg-fluent-brandHover active:bg-fluent-brandPressed text-white font-semibold py-3 rounded-fluentMd transition-colors shadow-fluent2 text-sm cursor-pointer mt-2">
                         Recevoir l'installateur Windows (.exe)
+                    </button>
+
+                    <p class="text-[11px] text-center text-fluent-fg3 pt-1">
+                        🔒 Compatible Windows 10 & 11 (64-bit). Aucune clé d'accès sensible n'est demandée sur ce site.
+                    </p>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PIED DE PAGE -->
+    <footer class="bg-fluent-bg border-t border-fluent-stroke2 py-8 text-xs text-fluent-fg3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div>
+                <span class="font-bold text-fluent-fg1">Woo Relay</span> — Gestion de Stock & Commandes WooCommerce (Édition Pro)
+            </div>
+            <div class="font-mono text-[11px]">
+                Exécutable Windows x64 (.exe) • Moteur SQLite Local
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS : Animations AOS + Synchronisation content.json -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 550, once: true });
+
+        // Synchronisation robuste avec content.json (ne bloque pas si le fichier est absent)
+        fetch('content.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Fichier content.json non trouvé');
+                return response.json();
+            })
+            .then(data => {
+                if (data.hero_badge) document.getElementById('hero-badge').innerText = data.hero_badge;
+                if (data.hero_title) document.getElementById('hero-title').innerText = data.hero_title;
+                if (data.hero_description) document.getElementById('hero-desc').innerText = data.hero_description;
+                if (data.cta_button) document.getElementById('cta-btn').innerText = data.cta_button;
+                if (data.feature_1_title) document.getElementById('f1-title').innerText = data.feature_1_title;
+                if (data.feature_1_desc) document.getElementById('f1-desc').innerText = data.feature_1_desc;
+                if (data.feature_2_title) document.getElementById('f2-title').innerText = data.feature_2_title;
+                if (data.feature_2_desc) document.getElementById('f2-desc').innerText = data.feature_2_desc;
+                if (data.feature_3_title) document.getElementById('f3-title').innerText = data.feature_3_title;
+                if (data.feature_3_desc) document.getElementById('f3-desc').innerText = data.feature_3_desc;
+
+                // Affichage direct dès qu'une image est spécifiée
+                if (data.hero_image && data.hero_image.trim() !== "") {
+                    var heroImg = document.getElementById('hero-img');
+                    heroImg.src = data.hero_image;
+                    document.getElementById('cms-image-wrapper').classList.remove('hidden');
+                    document.getElementById('default-ui-mockup').classList.add('hidden');
+                }
+            })
+            .catch(function(err) {
+                // Fonctionne en mode autonome sans erreur bloquante
+                console.info('Mode autonome actif (mockup vectoriel affiché).');
+            });
+    </script>
+</body>
+</html>
