@@ -2,18 +2,18 @@
 <html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Woo Relay — Logiciel Desktop Windows de Gestion de Stock & Commandes WooCommerce</title>
-    <meta name="description" content="Application Windows ultra-rapide (0,1s) pour piloter votre boutique WooCommerce en local : gestion de stock, calcul des marges, commandes en temps réel et liaison directe Yalidine, ZR Express, Maystro et Procolis. Zéro plugin requis.">
+    <meta name="description" content="Application de bureau Windows (0,1s) pour piloter votre boutique WooCommerce en local : gestion de stock, marges réelles, alertes commandes et liaison transporteurs algériens (Yalidine, ZR Express, Maystro, Procolis). Zéro plugin requis.">
     <link rel="canonical" href="https://woorelay.netlify.app/">
 
-    <!-- Open Graph / Réseaux sociaux -->
+    <!-- Open Graph SEO -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Woo Relay — Gestion de Stock & Commandes WooCommerce sur Windows">
-    <meta property="og:description" content="Oubliez la lenteur de l'admin WordPress. Gérez vos stocks, marges et expéditions (Yalidine, ZR Express, Maystro, Procolis) en 0,1 seconde depuis votre PC.">
+    <meta property="og:description" content="Déportez vos opérations WooCommerce sur une application Windows ultra-rapide (0,1s). Mises à jour de stock, marges nettes et bordereaux d'expédition sans surcharger WordPress.">
     <meta property="og:url" content="https://woorelay.netlify.app/">
 
-    <!-- Données structurées SEO (Schema.org SoftwareApplication) -->
+    <!-- Données structurées SEO Google (Schema.org SoftwareApplication) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -21,20 +21,21 @@
       "name": "Woo Relay - Gestion de Stock WooCommerce (Édition Professionnelle)",
       "operatingSystem": "Windows 10, Windows 11 (64-bit)",
       "applicationCategory": "BusinessApplication",
-      "description": "Application de bureau Windows pour gérer les stocks, les prix, les marges et les expéditions WooCommerce en 0,1 seconde via une base locale SQLite haute performance.",
+      "description": "Application de bureau Windows pour gérer les stocks, les marges, les commandes en direct et les expéditions WooCommerce en 0,1 seconde via un moteur local SQLite.",
+      "fileFormat": "application/x-msdownload",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "DZD",
-        "description": "Période d'essai gratuite de 14 jours incluse (Formats .exe et .zip)"
+        "description": "Période d'évaluation gratuite de 14 jours (Installateur officiel .exe)"
       }
     }
     </script>
 
-    <!-- Polices Pro : Plus Jakarta Sans & JetBrains Mono -->
+    <!-- Typographie Système Windows : Segoe UI Variable -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -42,198 +43,261 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        fluent: {
+                            brand: '#0F6CBD',
+                            brandHover: '#115EA3',
+                            brandPressed: '#0C3B5E',
+                            brandTint: '#EBF3FC',
+                            bg: '#FFFFFF',
+                            canvas: '#F5F5F5',
+                            subtle: '#F0F0F0',
+                            fg1: '#242424',
+                            fg2: '#424242',
+                            fg3: '#616161',
+                            stroke1: '#D1D1D1',
+                            stroke2: '#E0E0E0',
+                        }
+                    },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['"Segoe UI Variable Display"', '"Segoe UI Variable Text"', '"Segoe UI"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'Consolas', 'monospace'],
+                    },
+                    borderRadius: {
+                        fluentSm: '2px',
+                        fluentMd: '4px',
+                        fluentLg: '8px',
+                        fluentXl: '12px',
+                    },
+                    boxShadow: {
+                        fluent2: '0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14)',
+                        fluent4: '0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14)',
+                        fluent8: '0 0 2px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.14)',
+                        fluent16: '0 0 2px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.14)',
                     }
                 }
             }
         }
     </script>
 
+    <!-- Précautions & Verrouillage Anti-Débordement Universel -->
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            background-color: #F5F5F5;
+            color: #242424;
+            -webkit-text-size-adjust: 100%;
+        }
+        h1, h2, h3, h4, p, span, a, div, td, th, label, button {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .flex > * {
+            min-width: 0;
+        }
+        /* Style des inputs Fluent 2 avec soulignement actif et prévention du zoom iOS */
+        .fluent-input {
+            border: 1px solid #D1D1D1;
+            border-bottom: 2px solid #616161;
+            transition: border-color 0.15s ease-in-out;
+            font-size: 16px; /* Précaution iOS Safari : évite le zoom auto en dessous de 16px */
+        }
+        @media (min-width: 640px) {
+            .fluent-input {
+                font-size: 0.875rem; /* 14px sur desktop */
+            }
+        }
+        .fluent-input:focus {
+            border-bottom-color: #0F6CBD;
+            outline: none;
+        }
+    </style>
+
     <!-- Animations AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Netlify Identity (pour l'accès /admin) -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
-<body class="bg-[#F8FAFC] text-slate-900 font-sans antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
+<body class="font-sans antialiased selection:bg-fluent-brandTint selection:text-fluent-brand">
 
-    <!-- BARRE DE NAVIGATION -->
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-extrabold text-lg shadow-sm">
-                    W
+    <!-- BARRE DE NAVIGATION (MICROSOFT FLUENT) -->
+    <nav class="sticky top-0 z-50 bg-fluent-bg/95 backdrop-blur-md border-b border-fluent-stroke2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-8 h-8 rounded-fluentMd bg-fluent-brand flex items-center justify-center text-white font-bold text-sm shadow-fluent2 shrink-0">
+                    WR
                 </div>
-                <div>
-                    <span class="font-extrabold text-lg tracking-tight text-slate-900">Woo Relay</span>
-                    <span class="hidden sm:inline-block ml-2 text-xs font-mono font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">Édition Pro</span>
+                <div class="flex items-baseline gap-2 min-w-0 truncate">
+                    <span class="font-bold text-base tracking-tight text-fluent-fg1 truncate">Woo Relay</span>
+                    <span class="text-[11px] font-mono text-fluent-fg3 hidden sm:inline shrink-0">Édition Pro • Win 10/11</span>
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                <a href="#probleme" class="hover:text-blue-600 transition">Pourquoi Woo Relay</a>
-                <a href="#modules" class="hover:text-blue-600 transition">Fonctionnalités</a>
-                <a href="#expedition" class="hover:text-blue-600 transition">Livraison DZ</a>
-                <a href="#comparatif" class="hover:text-blue-600 transition">Comparatif</a>
-                <a href="#securite" class="hover:text-blue-600 transition">Sécurité</a>
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-fluent-fg2 shrink-0">
+                <a href="#probleme" class="hover:text-fluent-brand transition-colors">Architecture</a>
+                <a href="#modules" class="hover:text-fluent-brand transition-colors">Modules</a>
+                <a href="#expedition" class="hover:text-fluent-brand transition-colors">Expédition DZ</a>
+                <a href="#comparatif" class="hover:text-fluent-brand transition-colors">Comparatif</a>
+                <a href="#securite" class="hover:text-fluent-brand transition-colors">Sécurité</a>
             </div>
 
-            <div class="flex items-center gap-3">
-                <span class="hidden lg:inline-flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
-                    🪟 Win 10/11 (64-bit)
-                </span>
-                <a href="#essai" class="bg-slate-900 hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition shadow-sm">
-                    Essai gratuit 14j
+            <div class="flex items-center gap-2 shrink-0">
+                <a href="#essai" class="bg-fluent-brand hover:bg-fluent-brandHover active:bg-fluent-brandPressed text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-fluentMd shadow-fluent2 transition-colors whitespace-nowrap">
+                    <span class="hidden sm:inline">Obtenir l'</span>installateur (.exe)
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <header class="relative pt-12 pb-20 md:pt-20 md:pb-28 border-b border-slate-200 bg-gradient-to-b from-white to-[#F8FAFC]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
+    <!-- SECTION HERO -->
+    <header class="relative pt-8 pb-14 sm:pt-16 sm:pb-24 border-b border-fluent-stroke2 bg-fluent-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                 
-                <!-- Colonne Gauche : Proposition de valeur -->
-                <div class="lg:col-span-6 space-y-6" data-aos="fade-right">
-                    <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-mono font-semibold px-3 py-1.5 rounded-md">
-                        <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                        <span id="hero-badge">CLIENT LOURD WINDOWS (.EXE & .ZIP) • ZÉRO PLUGIN WORDPRESS</span>
+                <!-- Colonne Gauche : Pitch & CTA -->
+                <div class="lg:col-span-6 space-y-4 sm:space-y-5 text-left min-w-0" data-aos="fade-up">
+                    <div class="inline-flex items-center gap-2 bg-fluent-brandTint border border-blue-200/60 text-fluent-brand text-[11px] font-mono font-semibold px-2.5 py-1 rounded-fluentSm max-w-full">
+                        <span class="w-1.5 h-1.5 rounded-full bg-fluent-brand shrink-0"></span>
+                        <span id="hero-badge" class="truncate">CLIENT LOURD WINDOWS (.EXE) • ZÉRO EXTENSION WORDPRESS</span>
                     </div>
 
-                    <h1 id="hero-title" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-                        Pilotez votre stock et vos commandes WooCommerce en <span class="text-blue-600 underline decoration-blue-200 decoration-4 underline-offset-4">0,1 seconde</span>.
+                    <h1 id="hero-title" class="text-2xl sm:text-4xl lg:text-[42px] font-bold text-fluent-fg1 tracking-tight leading-snug sm:leading-[1.18]">
+                        Pilotez votre catalogue et vos commandes WooCommerce sans la lenteur de WordPress.
                     </h1>
 
-                    <p id="hero-desc" class="text-base sm:text-lg text-slate-600 leading-relaxed">
-                        Fini les pages d'administration WordPress qui mettent 10 secondes à charger. <strong>Woo Relay</strong> connecte votre boutique à une application de bureau locale propulsée par SQLite : gestion des stocks en 1 clic, calcul des marges nettes, alerte sonore des commandes et expédition directe (Yalidine, ZR Express, Maystro, Procolis).
+                    <p id="hero-desc" class="text-sm sm:text-base text-fluent-fg2 leading-relaxed">
+                        Woo Relay déporte l'ensemble de vos opérations sur une base de données locale SQLite haute performance. Mettez à jour vos stocks, contrôlez vos marges réelles et éditez vos bordereaux de livraison en 0,1 seconde, sans saturer votre serveur web.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
-                        <a href="#essai" id="cta-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3.5 rounded-xl transition shadow-md shadow-blue-600/15 text-center">
-                            Demander ma version d'essai (14 jours)
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <a href="#essai" id="cta-btn" class="w-full sm:w-auto bg-fluent-brand hover:bg-fluent-brandHover active:bg-fluent-brandPressed text-white font-semibold px-6 py-3 rounded-fluentMd shadow-fluent4 transition-all text-center text-sm">
+                            Demander l'installateur Windows (Essai 14 jours)
                         </a>
-                        <a href="#modules" class="bg-white hover:bg-slate-50 text-slate-800 font-semibold px-6 py-3.5 rounded-xl transition border border-slate-300 text-center">
-                            Explorer les 3 modules
+                        <a href="#modules" class="w-full sm:w-auto bg-white hover:bg-fluent-subtle text-fluent-fg1 font-semibold px-5 py-3 rounded-fluentMd border border-fluent-stroke1 transition-colors text-center text-sm">
+                            Spécifications techniques
                         </a>
                     </div>
 
-                    <!-- Spécifications techniques rapides -->
-                    <div class="pt-4 grid grid-cols-3 gap-4 border-t border-slate-200 text-xs">
-                        <div>
-                            <div class="font-mono font-bold text-slate-900 text-base">0,1 sec</div>
-                            <div class="text-slate-500">Moteur SQLite local</div>
+                    <!-- Métriques Clés (Sécurisées pour les petits écrans) -->
+                    <div class="pt-5 grid grid-cols-3 gap-2 sm:gap-3 border-t border-fluent-stroke2 text-left">
+                        <div class="min-w-0">
+                            <div class="font-mono font-bold text-fluent-fg1 text-base sm:text-xl">0,1 s</div>
+                            <div class="text-[11px] sm:text-xs text-fluent-fg3 leading-tight mt-0.5">Moteur SQLite local</div>
                         </div>
-                        <div>
-                            <div class="font-mono font-bold text-slate-900 text-base">0 Plugin</div>
-                            <div class="text-slate-500">N'alourdit pas WordPress</div>
+                        <div class="min-w-0">
+                            <div class="font-mono font-bold text-fluent-fg1 text-base sm:text-xl">0 plugin</div>
+                            <div class="text-[11px] sm:text-xs text-fluent-fg3 leading-tight mt-0.5">Connexion REST directe</div>
                         </div>
-                        <div>
-                            <div class="font-mono font-bold text-slate-900 text-base">58 Wilayas</div>
-                            <div class="text-slate-500">Transporteurs DZ intégrés</div>
+                        <div class="min-w-0">
+                            <div class="font-mono font-bold text-fluent-fg1 text-base sm:text-xl">58 Wilayas</div>
+                            <div class="text-[11px] sm:text-xs text-fluent-fg3 leading-tight mt-0.5">Transporteurs DZ natifs</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Colonne Droite : Aperçu du Logiciel Desktop (ou Image CMS) -->
-                <div class="lg:col-span-6" data-aos="fade-left" data-aos-delay="100">
+                <!-- Colonne Droite : Emplacement Capture d'Écran ou Mockup -->
+                <div class="lg:col-span-6 min-w-0" data-aos="fade-up" data-aos-delay="100">
                     
-                    <!-- Image uploadée via le CMS (cachée par défaut si aucune image n'est fournie) -->
+                    <!-- Emplacement pour image uploadée -->
                     <div id="cms-image-wrapper" class="hidden">
-                        <img id="hero-img" src="" alt="Interface du logiciel Woo Relay sur Windows" class="rounded-xl shadow-2xl border border-slate-300 w-full" />
+                        <div class="bg-fluent-bg rounded-fluentLg p-1.5 border border-fluent-stroke1 shadow-fluent16">
+                            <img id="hero-img" src="" alt="Capture d'écran de l'application Woo Relay sur Windows 11" class="rounded-fluentMd w-full h-auto object-cover" />
+                        </div>
                     </div>
 
-                    <!-- Aperçu réaliste de l'application Windows (affiché par défaut) -->
-                    <div id="default-ui-mockup" class="bg-slate-900 rounded-xl shadow-2xl border border-slate-700 overflow-hidden text-slate-100">
-                        <!-- Barre de titre Windows 11 -->
-                        <div class="bg-slate-950 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between text-xs font-mono">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                                <span class="text-slate-300 font-semibold">Woo Relay Pro.exe</span>
-                                <span class="text-slate-500 hidden sm:inline">— Connecté (127.0.0.1 • AES-256)</span>
+                    <!-- Mockup interactif Fluent Windows 11 (Affiché par défaut) -->
+                    <div id="default-ui-mockup" class="bg-white rounded-fluentLg border border-fluent-stroke1 shadow-fluent16 overflow-hidden text-fluent-fg1 text-left">
+                        <!-- Barre de titre Windows 11 Fluent -->
+                        <div class="bg-fluent-subtle px-3 sm:px-4 py-2 border-b border-fluent-stroke2 flex items-center justify-between text-xs font-mono">
+                            <div class="flex items-center gap-2 truncate">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0"></span>
+                                <span class="text-fluent-fg1 font-semibold truncate">Woo Relay Pro (x64)</span>
+                                <span class="text-fluent-fg3 hidden sm:inline">— Connecté (127.0.0.1)</span>
                             </div>
-                            <div class="flex items-center gap-3 text-slate-400">
-                                <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded text-[11px]">Sync: 0.08s</span>
+                            <div class="flex items-center gap-2.5 sm:gap-3 text-fluent-fg3 shrink-0">
+                                <span class="bg-fluent-brandTint text-fluent-brand px-1.5 py-0.5 rounded text-[11px] font-semibold">0,08s</span>
                                 <span>─</span>
                                 <span>□</span>
                                 <span>✕</span>
                             </div>
                         </div>
 
-                        <!-- Contenu simulé de l'application -->
-                        <div class="p-5 space-y-4">
-                            <!-- Barre d'outils & KPIs -->
-                            <div class="grid grid-cols-3 gap-3">
-                                <div class="bg-slate-800/90 p-3 rounded-lg border border-slate-700">
-                                    <div class="text-[11px] text-slate-400">Commandes du jour</div>
-                                    <div class="text-lg font-bold font-mono text-white mt-0.5">24 <span class="text-xs text-emerald-400 font-normal">🔔 +3 nouv.</span></div>
+                        <!-- Vue simulée du tableau de bord de stock -->
+                        <div class="p-3.5 sm:p-5 space-y-3.5 sm:space-y-4 bg-fluent-canvas">
+                            
+                            <!-- KPIs Fluent -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
+                                <div class="bg-fluent-bg p-3 rounded-fluentMd border border-fluent-stroke2 shadow-fluent2">
+                                    <div class="text-[11px] text-fluent-fg3">Commandes du jour</div>
+                                    <div class="text-base sm:text-lg font-bold font-mono text-fluent-fg1 mt-0.5">24 <span class="text-xs text-emerald-600 font-normal">🔔 +3</span></div>
                                 </div>
-                                <div class="bg-slate-800/90 p-3 rounded-lg border border-slate-700">
-                                    <div class="text-[11px] text-slate-400">Marge Nette Estimée</div>
-                                    <div class="text-lg font-bold font-mono text-emerald-400 mt-0.5">+48 500 DZD</div>
+                                <div class="bg-fluent-bg p-3 rounded-fluentMd border border-fluent-stroke2 shadow-fluent2">
+                                    <div class="text-[11px] text-fluent-fg3">Marge Nette Estimée</div>
+                                    <div class="text-base sm:text-lg font-bold font-mono text-emerald-700 mt-0.5">+48 500 DZD</div>
                                 </div>
-                                <div class="bg-slate-800/90 p-3 rounded-lg border border-slate-700">
-                                    <div class="text-[11px] text-slate-400">Alertes Stock</div>
-                                    <div class="text-lg font-bold font-mono text-amber-400 mt-0.5">2 critiques</div>
-                                </div>
-                            </div>
-
-                            <!-- Table de gestion de stock en 1 clic -->
-                            <div class="bg-slate-950/70 rounded-lg border border-slate-800 overflow-hidden">
-                                <div class="px-3 py-2 bg-slate-900 border-b border-slate-800 flex justify-between items-center text-[11px] font-mono text-slate-400">
-                                    <span>PRODUIT / SKU</span>
-                                    <span>PRIX & MARGE</span>
-                                    <span>STOCK (1 CLIC)</span>
-                                </div>
-                                <div class="divide-y divide-slate-800/80 text-xs">
-                                    <div class="px-3 py-2.5 flex items-center justify-between">
-                                        <div>
-                                            <div class="font-semibold text-white">Casque Pro Wireless</div>
-                                            <div class="font-mono text-[10px] text-slate-400">SKU-8841 • Achat: 4 200 DZD</div>
-                                        </div>
-                                        <div class="text-right font-mono">
-                                            <div class="text-white font-semibold">6 900 DZD</div>
-                                            <div class="text-[10px] text-emerald-400">Marge: +39%</div>
-                                        </div>
-                                        <div class="flex items-center gap-1.5 font-mono">
-                                            <span class="px-2 py-0.5 bg-slate-800 rounded border border-slate-700">-</span>
-                                            <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 font-bold rounded">42</span>
-                                            <span class="px-2 py-0.5 bg-slate-800 rounded border border-slate-700">+</span>
-                                        </div>
-                                    </div>
-                                    <div class="px-3 py-2.5 flex items-center justify-between">
-                                        <div>
-                                            <div class="font-semibold text-white">Montre Sport Édition</div>
-                                            <div class="font-mono text-[10px] text-slate-400">SKU-3109 • Achat: 5 500 DZD</div>
-                                        </div>
-                                        <div class="text-right font-mono">
-                                            <div class="text-white font-semibold">8 500 DZD</div>
-                                            <div class="text-[10px] text-emerald-400">Marge: +35%</div>
-                                        </div>
-                                        <div class="flex items-center gap-1.5 font-mono">
-                                            <span class="px-2 py-0.5 bg-slate-800 rounded border border-slate-700">-</span>
-                                            <span class="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 font-bold rounded">03 !</span>
-                                            <span class="px-2 py-0.5 bg-slate-800 rounded border border-slate-700">+</span>
-                                        </div>
-                                    </div>
+                                <div class="bg-fluent-bg p-3 rounded-fluentMd border border-fluent-stroke2 shadow-fluent2">
+                                    <div class="text-[11px] text-fluent-fg3">Alertes Stock</div>
+                                    <div class="text-base sm:text-lg font-bold font-mono text-amber-600 mt-0.5">2 critiques</div>
                                 </div>
                             </div>
 
-                            <!-- Notification Commande + Expédition DZ -->
-                            <div class="bg-blue-950/60 border border-blue-800/70 rounded-lg p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-                                <div>
-                                    <div class="flex items-center gap-2">
-                                        <span class="bg-blue-500 text-white text-[10px] font-mono font-bold px-1.5 py-0.5 rounded">NOUVELLE COMMANDE #4892</span>
-                                        <span class="text-blue-200 font-semibold">Alger (Stop Desk • Ouvrir colis : OUI)</span>
-                                    </div>
-                                    <div class="text-slate-300 mt-1 text-[11px]">Client : Amine K. — 0550 XX XX XX</div>
+                            <!-- Grille de stock en 1 clic -->
+                            <div class="bg-fluent-bg rounded-fluentMd border border-fluent-stroke2 overflow-hidden shadow-fluent2">
+                                <div class="px-3 py-2 bg-fluent-subtle border-b border-fluent-stroke2 flex justify-between items-center text-[10px] sm:text-[11px] font-mono text-fluent-fg3">
+                                    <span>RÉFÉRENCE & LIBELLÉ</span>
+                                    <span>PRIX / MARGE</span>
+                                    <span>RÉSERVE</span>
                                 </div>
-                                <div class="flex items-center gap-2 shrink-0">
-                                    <span class="bg-emerald-600 text-white px-2.5 py-1 rounded font-semibold text-[11px]">WhatsApp</span>
-                                    <span class="bg-white text-slate-900 px-2.5 py-1 rounded font-semibold text-[11px]">Bordereau Yalidine</span>
+                                <div class="divide-y divide-fluent-stroke2 text-xs">
+                                    <div class="p-2 sm:p-2.5 flex items-center justify-between gap-2">
+                                        <div class="min-w-0">
+                                            <div class="font-semibold text-fluent-fg1 truncate text-xs">Casque Bluetooth ANC</div>
+                                            <div class="font-mono text-[10px] text-fluent-fg3 truncate">SKU-8841 • Achat: 4 200 DZD</div>
+                                        </div>
+                                        <div class="text-right font-mono shrink-0">
+                                            <div class="font-semibold text-fluent-fg1 text-xs">6 900 DZD</div>
+                                            <div class="text-[10px] text-emerald-600">+39% net</div>
+                                        </div>
+                                        <div class="flex items-center gap-1 font-mono shrink-0">
+                                            <span class="px-2 py-0.5 bg-fluent-subtle border border-fluent-stroke1 rounded-fluentSm text-fluent-fg2">-</span>
+                                            <span class="px-2 py-0.5 bg-fluent-brandTint text-fluent-brand font-bold rounded-fluentSm">42</span>
+                                            <span class="px-2 py-0.5 bg-fluent-subtle border border-fluent-stroke1 rounded-fluentSm text-fluent-fg2">+</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-2 sm:p-2.5 flex items-center justify-between gap-2">
+                                        <div class="min-w-0">
+                                            <div class="font-semibold text-fluent-fg1 truncate text-xs">Montre Sport GPS</div>
+                                            <div class="font-mono text-[10px] text-fluent-fg3 truncate">SKU-3109 • Achat: 5 500 DZD</div>
+                                        </div>
+                                        <div class="text-right font-mono shrink-0">
+                                            <div class="font-semibold text-fluent-fg1 text-xs">8 500 DZD</div>
+                                            <div class="text-[10px] text-emerald-600">+35% net</div>
+                                        </div>
+                                        <div class="flex items-center gap-1 font-mono shrink-0">
+                                            <span class="px-2 py-0.5 bg-fluent-subtle border border-fluent-stroke1 rounded-fluentSm text-fluent-fg2">-</span>
+                                            <span class="px-2 py-0.5 bg-amber-50 text-amber-700 font-bold rounded-fluentSm border border-amber-200">03</span>
+                                            <span class="px-2 py-0.5 bg-fluent-subtle border border-fluent-stroke1 rounded-fluentSm text-fluent-fg2">+</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- Fiche expédition intégrée -->
+                            <div class="bg-fluent-bg rounded-fluentMd border border-fluent-stroke2 p-2.5 sm:p-3 flex flex-wrap items-center justify-between gap-2 shadow-fluent2 text-xs">
+                                <div class="min-w-0">
+                                    <div class="flex items-center gap-1.5 flex-wrap">
+                                        <span class="bg-fluent-brand text-white text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-fluentSm shrink-0">#4892</span>
+                                        <span class="font-semibold text-fluent-fg1 truncate">Yalidine Express (Stop Desk)</span>
+                                    </div>
+                                    <div class="text-fluent-fg3 text-[11px] mt-0.5 truncate">Alger • Option : Ouvrir colis avant paiement</div>
+                                </div>
+                                <span class="bg-fluent-subtle border border-fluent-stroke1 text-fluent-fg1 font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-fluentSm text-[11px] sm:text-xs shrink-0">
+                                    Bordereau prêt
+                                </span>
+                            </div>
+
                         </div>
                     </div>
 
@@ -242,175 +306,174 @@
         </div>
     </header>
 
-    <!-- SECTION 1 : PROPOSITION DE VALEUR (POURQUOI CE LOGICIEL ?) -->
-    <section id="probleme" class="py-16 md:py-24 max-w-7xl mx-auto px-6">
-        <div class="max-w-3xl mx-auto text-center mb-14" data-aos="fade-up">
-            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Le constat terrain</span>
-            <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2">
-                Pourquoi gérer votre boutique depuis l'admin WordPress vous fait perdre du temps ?
+    <!-- SECTION 1 : CONSTAT & PROPOSITION DE VALEUR -->
+    <section id="probleme" class="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="max-w-3xl mx-auto text-center mb-8 sm:mb-14" data-aos="fade-up">
+            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Constat Technique</span>
+            <h2 class="text-xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
+                Pourquoi dissocier la gestion quotidienne de votre hébergement WordPress ?
             </h2>
-            <p class="text-slate-600 mt-4">
-                Sur WordPress, chaque modification de stock ou changement de statut de commande recharge toute la page (5 à 10 secondes d'attente), sature votre hébergement et multiplie les erreurs de préparation.
+            <p class="text-fluent-fg2 mt-3 text-xs sm:text-sm sm:text-base leading-relaxed">
+                L'interface d'administration native de WooCommerce n'a pas été conçue pour le traitement intensif. L'exécution de requêtes PHP lourdes sur le serveur de production entraîne des délais de 5 à 10 secondes par vue, augmente le risque de surchauffe du processeur et ralentit la navigation de vos clients en ligne.
             </p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8 items-stretch">
-            <!-- Avant : WordPress Classique -->
-            <div class="bg-white p-8 rounded-2xl border border-red-200 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                <div class="inline-flex items-center gap-2 text-xs font-mono font-bold text-red-700 bg-red-50 px-3 py-1 rounded-md border border-red-200 mb-4">
-                    ✕ ADMINISTRATION WORDPRESS CLASSIQUE
+        <div class="grid md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
+            <!-- WordPress natif -->
+            <div class="bg-fluent-bg p-5 sm:p-8 rounded-fluentLg border border-red-200 shadow-fluent2 min-w-0" data-aos="fade-up">
+                <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-red-700 bg-red-50 px-2.5 py-1 rounded-fluentSm border border-red-200 mb-4">
+                    ✕ ADMINISTRATION WORDPRESS NATIVE
                 </div>
-                <h3 class="text-xl font-bold text-slate-900 mb-4">Lente, lourde et dépendante des plugins</h3>
-                <ul class="space-y-3 text-sm text-slate-600">
-                    <li class="flex items-start gap-2.5"><span class="text-red-500 font-bold">•</span> Pages produits et commandes qui mettent 5 à 10 secondes à s'ouvrir.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-red-500 font-bold">•</span> Aucune visibilité directe sur votre marge nette et vos prix d'achat fournisseurs.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-red-500 font-bold">•</span> E-mails de nouvelles commandes qui tombent en spam ou arrivent en retard.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-red-500 font-bold">•</span> Saisie manuelle fastidieuse des colis sur les plateformes de livraison.</li>
+                <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1 mb-3">Lenteur et surcharge serveur</h3>
+                <ul class="space-y-2.5 text-xs sm:text-sm text-fluent-fg2">
+                    <li class="flex items-start gap-2"><span class="text-red-500 font-bold shrink-0">•</span> Temps de réponse dépendants du serveur (latence de 5 à 10s par vue).</li>
+                    <li class="flex items-start gap-2"><span class="text-red-500 font-bold shrink-0">•</span> Absence de calcul automatique des marges basé sur les prix fournisseurs.</li>
+                    <li class="flex items-start gap-2"><span class="text-red-500 font-bold shrink-0">•</span> Notifications de commandes dépendantes du protocole SMTP (pertes ou retards).</li>
+                    <li class="flex items-start gap-2"><span class="text-red-500 font-bold shrink-0">•</span> Saisie manuelle récurrente des expéditions sur les sites des transporteurs.</li>
                 </ul>
             </div>
 
-            <!-- Après : Woo Relay Desktop -->
-            <div class="bg-slate-900 text-white p-8 rounded-2xl border border-slate-800 shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                <div class="inline-flex items-center gap-2 text-xs font-mono font-bold text-blue-300 bg-blue-500/20 px-3 py-1 rounded-md border border-blue-400/30 mb-4">
+            <!-- Woo Relay -->
+            <div class="bg-fluent-bg p-5 sm:p-8 rounded-fluentLg border border-fluent-stroke1 shadow-fluent8 min-w-0" data-aos="fade-up" data-aos-delay="100">
+                <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-fluent-brand bg-fluent-brandTint px-2.5 py-1 rounded-fluentSm border border-blue-200 mb-4">
                     ✓ APPLICATION DESKTOP WOO RELAY
                 </div>
-                <h3 class="text-xl font-bold mb-4">Base de données locale SQLite ultra-rapide (0,1s)</h3>
-                <ul class="space-y-3 text-sm text-slate-300">
-                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">✓</span> Modifications de stocks, de prix et de statuts instantanées sans recharger de page.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">✓</span> Calcul en temps réel du bénéfice net et du taux de rentabilité par produit.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">✓</span> Carillon sonore dès qu'une commande tombe + contact WhatsApp en 1 clic.</li>
-                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">✓</span> Envoi direct du colis au transporteur et impression du bordereau sans quitter l'écran.</li>
+                <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1 mb-3">Moteur local SQLite ultra-rapide (0,1s)</h3>
+                <ul class="space-y-2.5 text-xs sm:text-sm text-fluent-fg2">
+                    <li class="flex items-start gap-2"><span class="text-fluent-brand font-bold shrink-0">✓</span> Exécution instantanée des requêtes en local, synchronisées en arrière-plan.</li>
+                    <li class="flex items-start gap-2"><span class="text-fluent-brand font-bold shrink-0">✓</span> Suivi financier intégré : marge brute, marge nette et rentabilité en direct.</li>
+                    <li class="flex items-start gap-2"><span class="text-fluent-brand font-bold shrink-0">✓</span> Alerte sonore immédiate (carillon paramétrable) dès qu'une commande tombe.</li>
+                    <li class="flex items-start gap-2"><span class="text-fluent-brand font-bold shrink-0">✓</span> Passerelle directe vers les APIs logistiques pour éditer vos bordereaux en 1 clic.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2 : LES 3 MODULES PRINCIPAUX -->
-    <section id="modules" class="py-16 md:py-24 bg-white border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-3xl mb-14" data-aos="fade-up">
-                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Architecture fonctionnelle</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2">
-                    3 modules conçus pour les gérants de boutiques et préparateurs de commandes
+    <!-- SECTION 2 : LES 3 MODULES -->
+    <section id="modules" class="py-12 sm:py-20 bg-fluent-bg border-y border-fluent-stroke2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="max-w-3xl mb-8 sm:mb-14" data-aos="fade-up">
+                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Fonctionnalités Métier</span>
+                <h2 class="text-xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
+                    3 modules conçus pour les e-commerçants et gestionnaires de stock
                 </h2>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-8">
-                
-                <!-- MODULE A : STOCK & PRIX -->
-                <div class="bg-[#F8FAFC] p-8 rounded-2xl border border-slate-200 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+            <div class="grid lg:grid-cols-3 gap-5 sm:gap-6">
+                <!-- Module 01 -->
+                <div class="bg-fluent-canvas p-5 sm:p-7 rounded-fluentLg border border-fluent-stroke2 min-w-0 flex flex-col justify-between shadow-fluent2" data-aos="fade-up">
                     <div>
-                        <div class="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center font-mono font-bold text-lg mb-6 shadow-sm">
+                        <div class="w-9 h-9 rounded-fluentMd bg-fluent-brand text-white flex items-center justify-center font-mono font-bold text-sm mb-4">
                             01
                         </div>
-                        <span class="text-xs font-mono text-blue-600 font-semibold">MODULE A • INVENTAIRE & FINANCE</span>
-                        <h3 id="f1-title" class="text-xl font-bold text-slate-900 mt-1 mb-3">Gestion de Stock & Prix Ultra-Rapide</h3>
-                        <p id="f1-desc" class="text-sm text-slate-600 mb-6">
-                            Pilotez l'intégralité de votre catalogue produit sans aucune latence serveur et maîtrisez votre rentabilité réelle.
+                        <span class="text-xs font-mono text-fluent-brand font-semibold">MODULE A • INVENTAIRE & PRIX</span>
+                        <h3 id="f1-title" class="text-lg font-bold text-fluent-fg1 mt-1 mb-2">Contrôle des inventaires et analyse des marges</h3>
+                        <p id="f1-desc" class="text-xs sm:text-sm text-fluent-fg2 mb-4">
+                            Une grille haute densité permettant d'éditer les stocks et les tarifs sans jamais recharger l'affichage.
                         </p>
-                        <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-200 pt-5">
-                            <li><strong>• Mise à jour en 1 clic :</strong> Modifiez quantités et prix de vente instantanément.</li>
-                            <li><strong>• Calculateur de marges :</strong> Saisissez le prix d'achat fournisseur pour voir votre marge nette et rentabilité en direct.</li>
-                            <li><strong>• Alertes de stock critique :</strong> Indicateurs visuels de rupture et stock faible.</li>
-                            <li><strong>• Multi-devises auto :</strong> Compatible DZD, EUR, USD, MAD, etc.</li>
-                            <li><strong>• Recherche instantanée :</strong> Filtrage par nom, SKU, catégorie ou état de stock.</li>
+                        <ul class="space-y-2 text-xs sm:text-sm text-fluent-fg2 border-t border-fluent-stroke2 pt-4">
+                            <li><strong>• Édition directe en 1 clic :</strong> Ajustement immédiat des quantités et des prix de vente.</li>
+                            <li><strong>• Calcul de rentabilité nette :</strong> Saisie confidentielle des prix d'achat fournisseurs.</li>
+                            <li><strong>• Seuils d'alerte configurables :</strong> Identification visuelle des stocks critiques.</li>
+                            <li><strong>• Multi-devises automatique :</strong> Support DZD, EUR, USD, MAD.</li>
+                            <li><strong>• Recherche instantanée :</strong> Filtrage par référence SKU, libellé ou statut.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- MODULE B : COMMANDES (OMS) -->
-                <div class="bg-[#F8FAFC] p-8 rounded-2xl border border-slate-200 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                <!-- Module 02 -->
+                <div class="bg-fluent-canvas p-5 sm:p-7 rounded-fluentLg border border-fluent-stroke2 min-w-0 flex flex-col justify-between shadow-fluent2" data-aos="fade-up" data-aos-delay="100">
                     <div>
-                        <div class="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center font-mono font-bold text-lg mb-6 shadow-sm">
+                        <div class="w-9 h-9 rounded-fluentMd bg-fluent-brand text-white flex items-center justify-center font-mono font-bold text-sm mb-4">
                             02
                         </div>
-                        <span class="text-xs font-mono text-blue-600 font-semibold">MODULE B • ORDER MANAGEMENT (OMS)</span>
-                        <h3 id="f2-title" class="text-xl font-bold text-slate-900 mt-1 mb-3">Centre de Traitement des Commandes</h3>
-                        <p id="f2-desc" class="text-sm text-slate-600 mb-6">
-                            Ne ratez plus aucune vente. Confirmez et préparez vos commandes deux fois plus vite avec toutes les infos sous les yeux.
+                        <span class="text-xs font-mono text-fluent-brand font-semibold">MODULE B • ORDER MANAGEMENT (OMS)</span>
+                        <h3 id="f2-title" class="text-lg font-bold text-fluent-fg1 mt-1 mb-2">Centre de traitement et relation client</h3>
+                        <p id="f2-desc" class="text-xs sm:text-sm text-fluent-fg2 mb-4">
+                            Un tableau de bord opérationnel pour accélérer la préparation, la confirmation et le suivi des commandes.
                         </p>
-                        <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-200 pt-5">
-                            <li><strong>• Surveillance temps réel :</strong> Détection automatique des nouvelles commandes avec <strong>carillon sonore</strong> paramétrable.</li>
-                            <li><strong>• Statuts synchronisés :</strong> Passez d'<em>En attente</em> à <em>En cours</em>, <em>Terminée</em> ou <em>Annulée</em> en direct sur WooCommerce.</li>
-                            <li><strong>• Fiche client complète :</strong> Nom, Téléphone, Adresse, Ville/Wilaya, Panier et Notes.</li>
-                            <li><strong>• Contact client 1 clic :</strong> Bouton d'appel et ouverture directe de discussion <strong>WhatsApp</strong>.</li>
+                        <ul class="space-y-2 text-xs sm:text-sm text-fluent-fg2 border-t border-fluent-stroke2 pt-4">
+                            <li><strong>• Détection en temps réel :</strong> Signal sonore paramétrable dès qu'une commande est passée.</li>
+                            <li><strong>• Statuts synchronisés :</strong> Passage d'<em>En attente</em> à <em>Terminée</em> répercuté en direct.</li>
+                            <li><strong>• Fiche acheteur consolidée :</strong> Coordonnées, panier, adresse et notes client.</li>
+                            <li><strong>• Contact 1 clic :</strong> Appel direct et ouverture de conversation WhatsApp en un clic.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- MODULE C : EXPÉDITION & LIVRAISON -->
-                <div id="expedition" class="bg-[#F8FAFC] p-8 rounded-2xl border border-blue-300 ring-1 ring-blue-100 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                <!-- Module 03 -->
+                <div id="expedition" class="bg-fluent-canvas p-5 sm:p-7 rounded-fluentLg border border-fluent-brand/40 min-w-0 flex flex-col justify-between shadow-fluent2" data-aos="fade-up" data-aos-delay="200">
                     <div>
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center font-mono font-bold text-lg shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-9 h-9 rounded-fluentMd bg-fluent-brand text-white flex items-center justify-center font-mono font-bold text-sm">
                                 03
                             </div>
-                            <span class="text-[11px] font-mono font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full border border-emerald-200">
+                            <span class="text-[10px] font-mono font-semibold bg-emerald-50 text-emerald-800 px-2.5 py-0.5 rounded-fluentSm border border-emerald-200">
                                 100% Optionnel (ON/OFF)
                             </span>
                         </div>
-                        <span class="text-xs font-mono text-blue-600 font-semibold">MODULE C • LOGISTIQUE ALGÉRIE & INTL</span>
-                        <h3 id="f3-title" class="text-xl font-bold text-slate-900 mt-1 mb-3">Expédition & Transporteurs Intégrés</h3>
-                        <p id="f3-desc" class="text-sm text-slate-600 mb-6">
-                            Activez le module d'expédition uniquement si vous en avez besoin et générez vos bordereaux en 1 clic.
+                        <span class="text-xs font-mono text-fluent-brand font-semibold">MODULE C • LOGISTIQUE ALGÉRIE</span>
+                        <h3 id="f3-title" class="text-lg font-bold text-fluent-fg1 mt-1 mb-2">Intégration directe des transporteurs locaux</h3>
+                        <p id="f3-desc" class="text-xs sm:text-sm text-fluent-fg2 mb-4">
+                            Liaison native avec les transporteurs algériens pour automatiser l'envoi de colis sans ressaisie.
                         </p>
-                        <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-200 pt-5">
-                            <li><strong>• Transporteurs natifs :</strong> <strong>Yalidine Express</strong> (58 Wilayas), <strong>ZR Express</strong>, <strong>Maystro Delivery</strong>, <strong>Procolis</strong> + API Personnalisée.</li>
-                            <li><strong>• Modes de livraison :</strong> Choix entre <strong>Livraison à Domicile</strong> et <strong>Stop Desk</strong> (retrait en bureau).</li>
-                            <li><strong>• Spécial COD Algérie :</strong> Option <em>« Autoriser le client à ouvrir le colis avant de payer »</em>.</li>
-                            <li><strong>• Bordereau & Tracking :</strong> Génération automatique du numéro de suivi et étiquette prête à imprimer.</li>
+                        <ul class="space-y-2 text-xs sm:text-sm text-fluent-fg2 border-t border-fluent-stroke2 pt-4">
+                            <li><strong>• Transporteurs natifs :</strong> <strong>Yalidine Express</strong> (58 Wilayas), <strong>ZR Express</strong>, <strong>Maystro</strong>, <strong>Procolis</strong>.</li>
+                            <li><strong>• Modes de remise :</strong> Prise en charge de la Livraison à Domicile et du Stop Desk.</li>
+                            <li><strong>• Spécifique COD Algérie :</strong> Option « Autoriser l'ouverture du colis avant paiement ».</li>
+                            <li><strong>• Bordereaux & Tracking :</strong> Numéro de suivi généré et bordereau imprimable en 1 clic.</li>
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3 : TABLEAU COMPARATIF -->
-    <section id="comparatif" class="py-16 md:py-24 max-w-5xl mx-auto px-6">
-        <div class="text-center mb-12" data-aos="fade-up">
-            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Comparatif Technique</span>
-            <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2">
-                Administration WordPress vs Woo Relay Desktop
+    <!-- SECTION 3 : TABLEAU COMPARATIF (ROBUSTE ET DÉFILABLE) -->
+    <section id="comparatif" class="py-12 sm:py-20 max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-6 sm:mb-12" data-aos="fade-up">
+            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Comparatif Technique</span>
+            <h2 class="text-xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
+                Administration WordPress native vs Woo Relay Desktop
             </h2>
+            <p class="text-xs text-fluent-fg3 mt-1.5 sm:hidden">Glissez vers la droite pour visualiser l'ensemble du tableau →</p>
         </div>
 
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+        <div class="bg-fluent-bg rounded-fluentLg border border-fluent-stroke1 shadow-fluent4 overflow-hidden" data-aos="fade-up">
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-collapse min-w-[550px]">
                     <thead>
-                        <tr class="bg-slate-900 text-white text-xs font-mono uppercase">
-                            <th class="py-4 px-6">Critère</th>
-                            <th class="py-4 px-6 text-slate-300">Admin WordPress Classique</th>
-                            <th class="py-4 px-6 bg-blue-600 text-white">Logiciel Desktop Woo Relay</th>
+                        <tr class="bg-fluent-subtle text-fluent-fg1 text-xs font-mono uppercase border-b border-fluent-stroke1">
+                            <th class="py-3.5 px-4 sm:px-6">Paramètre</th>
+                            <th class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Administration WordPress classique</th>
+                            <th class="py-3.5 px-4 sm:px-6 text-fluent-brand font-bold bg-fluent-brandTint/40">Application Windows Woo Relay</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-200 text-sm">
+                    <tbody class="divide-y divide-fluent-stroke2 text-xs sm:text-sm">
                         <tr>
-                            <td class="py-4 px-6 font-bold text-slate-900">Vitesse d'exécution</td>
-                            <td class="py-4 px-6 text-slate-600">Lente (requêtes serveur lourdes, 5 à 10s)</td>
-                            <td class="py-4 px-6 font-semibold text-blue-700 bg-blue-50/40">⚡ Instantanée (Base SQLite locale — 0,1s)</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Vitesse d'affichage</td>
+                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Lente (5 à 10 secondes par vue)</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandTint/20">0,1 seconde (base locale SQLite)</td>
                         </tr>
                         <tr>
-                            <td class="py-4 px-6 font-bold text-slate-900">Sécurité des données</td>
-                            <td class="py-4 px-6 text-slate-600">Dépend des plugins tiers installés</td>
-                            <td class="py-4 px-6 font-semibold text-blue-700 bg-blue-50/40">🔒 Clés API chiffrées localement (AES-256-GCM)</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Sécurité des accès API</td>
+                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Dépendante des plugins tiers</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandTint/20">Chiffrement local AES-256-GCM</td>
                         </tr>
                         <tr>
-                            <td class="py-4 px-6 font-bold text-slate-900">Notifications de commande</td>
-                            <td class="py-4 px-6 text-slate-600">E-mails souvent en spam ou retardés</td>
-                            <td class="py-4 px-6 font-semibold text-blue-700 bg-blue-50/40">🔔 Carillon sonore & badge en direct</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Alerte nouvelle commande</td>
+                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">E-mails sensibles au spam ou retardés</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandTint/20">Carillon sonore & alerte visuelle instantanée</td>
                         </tr>
                         <tr>
-                            <td class="py-4 px-6 font-bold text-slate-900">Expédition colis</td>
-                            <td class="py-4 px-6 text-slate-600">Saisie manuelle chez le livreur</td>
-                            <td class="py-4 px-6 font-semibold text-blue-700 bg-blue-50/40">🚚 Liaison API directe en 1 clic (Yalidine, ZR, Maystro, Procolis)</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Préparation logistique</td>
+                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Saisie manuelle sur le portail livreur</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandTint/20">Liaison API directe et bordereau en 1 clic</td>
                         </tr>
                         <tr>
-                            <td class="py-4 px-6 font-bold text-slate-900">Installation sur WordPress</td>
-                            <td class="py-4 px-6 text-slate-600">Nécessite des extensions lourdes</td>
-                            <td class="py-4 px-6 font-semibold text-blue-700 bg-blue-50/40">✓ Zéro plugin requis sur votre site WordPress</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-bold text-fluent-fg1">Charge serveur WordPress</td>
+                            <td class="py-3.5 px-4 sm:px-6 text-fluent-fg2">Multiplie les requêtes PHP/MySQL</td>
+                            <td class="py-3.5 px-4 sm:px-6 font-semibold text-fluent-brand bg-fluent-brandTint/20">Zéro plugin tiers requis sur WordPress</td>
                         </tr>
                     </tbody>
                 </table>
@@ -418,190 +481,112 @@
         </div>
     </section>
 
-    <!-- SECTION 4 : SÉCURITÉ & PROTECTION DE NIVEAU ENTREPRISE -->
-    <section id="securite" class="py-16 md:py-24 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-3xl mb-14" data-aos="fade-up">
-                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-400">Architecture & Cybersécurité</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold mt-2">
-                    Conçu avec des standards de sécurité de niveau entreprise
+    <!-- SECTION 4 : SÉCURITÉ DE NIVEAU ENTREPRISE -->
+    <section id="securite" class="py-12 sm:py-20 bg-fluent-bg border-t border-fluent-stroke2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="max-w-3xl mb-8 sm:mb-14" data-aos="fade-up">
+                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Architecture & Cybersécurité</span>
+                <h2 class="text-xl sm:text-3xl font-bold text-fluent-fg1 mt-2">
+                    Sécurité des données et étanchéité de l'application
                 </h2>
-                <p class="text-slate-400 mt-3 text-sm sm:text-base">
-                    Vos données commerciales, vos tarifs fournisseurs et vos clés WooCommerce restent strictement sur votre machine Windows.
+                <p class="text-fluent-fg2 mt-2 text-xs sm:text-sm">
+                    Vos données commerciales, vos tarifs fournisseurs et vos clés secrètes WooCommerce restent strictement confinés sur votre machine Windows.
                 </p>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-slate-800/70 p-6 rounded-xl border border-slate-700" data-aos="fade-up" data-aos-delay="100">
-                    <div class="font-mono text-xs text-blue-400 font-semibold mb-2">AES-256-GCM</div>
-                    <h3 class="font-bold text-lg mb-2">Clés API Chiffrées</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Vos clés secrètes WooCommerce sont chiffrées en AES-256-GCM directement sur votre matériel et ne transitent jamais en clair à l'écran.
-                    </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
+                <div class="bg-fluent-canvas p-4 sm:p-5 rounded-fluentMd border border-fluent-stroke2 min-w-0 shadow-fluent2" data-aos="fade-up">
+                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">AES-256-GCM</div>
+                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Clés Chiffrées</h3>
+                    <p class="text-xs text-fluent-fg2">Vos clés API WooCommerce sont chiffrées localement et ne transitent jamais sur un serveur tiers.</p>
                 </div>
-
-                <div class="bg-slate-800/70 p-6 rounded-xl border border-slate-700" data-aos="fade-up" data-aos-delay="150">
-                    <div class="font-mono text-xs text-blue-400 font-semibold mb-2">127.0.0.1 LOCALHOST</div>
-                    <h3 class="font-bold text-lg mb-2">Étanchéité Réseau</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Serveur local verrouillé strictement sur 127.0.0.1 avec jeton de session aléatoire généré à chaque démarrage (protection anti-CSRF / CORS).
-                    </p>
+                <div class="bg-fluent-canvas p-4 sm:p-5 rounded-fluentMd border border-fluent-stroke2 min-w-0 shadow-fluent2" data-aos="fade-up" data-aos-delay="50">
+                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">127.0.0.1</div>
+                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Étanchéité Réseau</h3>
+                    <p class="text-xs text-fluent-fg2">Serveur local sécurisé avec jeton de session aléatoire unique à chaque démarrage (anti-CORS / CSRF).</p>
                 </div>
-
-                <div class="bg-slate-800/70 p-6 rounded-xl border border-slate-700" data-aos="fade-up" data-aos-delay="200">
-                    <div class="font-mono text-xs text-blue-400 font-semibold mb-2">BYTECODE V8 (.JSC)</div>
-                    <h3 class="font-bold text-lg mb-2">Exécutable Protégé</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        L'ensemble du code applicatif est compilé en Bytecode V8 binaire (.jsc) pour garantir l'intégrité et la stabilité de l'application.
-                    </p>
+                <div class="bg-fluent-canvas p-4 sm:p-5 rounded-fluentMd border border-fluent-stroke2 min-w-0 shadow-fluent2" data-aos="fade-up" data-aos-delay="100">
+                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">BYTECODE V8 (.JSC)</div>
+                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Exécutable Protégé</h3>
+                    <p class="text-xs text-fluent-fg2">Code applicatif compilé en Bytecode binaire pour prévenir toute altération et rétro-ingénierie.</p>
                 </div>
-
-                <div class="bg-slate-800/70 p-6 rounded-xl border border-slate-700" data-aos="fade-up" data-aos-delay="250">
-                    <div class="font-mono text-xs text-blue-400 font-semibold mb-2">ED25519 + MACHINE ID</div>
-                    <h3 class="font-bold text-lg mb-2">Licence Verrouillée</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Authentification cryptographique asymétrique Ed25519 liée au poste de travail. Chaque copie démarre vierge de toute donnée.
-                    </p>
+                <div class="bg-fluent-canvas p-4 sm:p-5 rounded-fluentMd border border-fluent-stroke2 min-w-0 shadow-fluent2" data-aos="fade-up" data-aos-delay="150">
+                    <div class="font-mono text-xs text-fluent-brand font-semibold mb-1">ED25519</div>
+                    <h3 class="font-bold text-base text-fluent-fg1 mb-1">Licence Matérielle</h3>
+                    <p class="text-xs text-fluent-fg2">Contrôle cryptographique asymétrique adossé à l'identifiant matériel unique de votre PC (Machine ID).</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 5 : DISTRIBUTION & DEMANDE DE VERSION D'ESSAI (14 JOURS) -->
-    <section id="essai" class="py-16 md:py-24 max-w-6xl mx-auto px-6">
-        <div class="grid lg:grid-cols-12 gap-12 items-start">
+    <!-- SECTION 5 : DISTRIBUTION DIRECTE & FORMULAIRE DE CONTACT -->
+    <section id="essai" class="py-12 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            <!-- Explication transparente de la distribution -->
-            <div class="lg:col-span-6 space-y-6" data-aos="fade-right">
-                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Distribution & Licence</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900">
-                    Testez Woo Relay gratuitement pendant 14 jours sur votre PC
+            <div class="lg:col-span-6 space-y-4 sm:space-y-5 min-w-0" data-aos="fade-up">
+                <span class="text-xs font-mono font-semibold uppercase tracking-wider text-fluent-brand">Distribution Directe</span>
+                <h2 class="text-xl sm:text-3xl font-bold text-fluent-fg1">
+                    Obtenir l'installateur Windows (.exe)
                 </h2>
-                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    Nous envoyons personnellement chaque copie du logiciel afin de vous accompagner dans la liaison initiale avec votre boutique WooCommerce.
+                <p class="text-fluent-fg2 text-xs sm:text-sm leading-relaxed">
+                    Woo Relay est distribué directement aux gérants de boutiques afin d'assurer l'assistance lors de la connexion initiale avec votre boutique. Vous disposez d'une <strong>période d'évaluation complète de 14 jours</strong> sans engagement.
                 </p>
 
-                <div class="space-y-4 pt-2">
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-start gap-3.5">
-                        <span class="font-mono text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded border border-blue-200 mt-0.5">.EXE / .ZIP</span>
-                        <div>
-                            <h4 class="font-bold text-sm text-slate-900">2 formats Windows disponibles (64-bit)</h4>
-                            <p class="text-xs text-slate-600 mt-0.5">Installateur officiel Windows (<code>.exe</code>) ou Version Portable sans installation (<code>.zip</code>) compatible Windows 10 & 11.</p>
+                <div class="space-y-3 pt-1">
+                    <div class="bg-fluent-bg p-3.5 rounded-fluentMd border border-fluent-stroke2 shadow-fluent2 flex items-start gap-3 min-w-0">
+                        <span class="font-mono text-[10px] font-bold bg-fluent-brandTint text-fluent-brand px-2 py-1 rounded-fluentSm border border-blue-200 shrink-0">.EXE (x64)</span>
+                        <div class="min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-fluent-fg1">Installateur officiel Windows 10 & 11</h4>
+                            <p class="text-[11px] sm:text-xs text-fluent-fg3 mt-0.5">Exécutable 64-bit propre, sans dépendance requise sur le serveur WordPress.</p>
                         </div>
                     </div>
 
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-start gap-3.5">
-                        <span class="font-mono text-xs font-bold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded border border-emerald-200 mt-0.5">14 JOURS</span>
-                        <div>
-                            <h4 class="font-bold text-sm text-slate-900">Période d'évaluation complète</h4>
-                            <p class="text-xs text-slate-600 mt-0.5">14 jours d'essai gratuit intégrés par défaut pour tester la vitesse sur votre propre catalogue avant de choisir une licence (abonnement ou licence à vie).</p>
+                    <div class="bg-fluent-bg p-3.5 rounded-fluentMd border border-fluent-stroke2 shadow-fluent2 flex items-start gap-3 min-w-0">
+                        <span class="font-mono text-[10px] font-bold bg-emerald-50 text-emerald-800 px-2 py-1 rounded-fluentSm border border-emerald-200 shrink-0">14 JOURS</span>
+                        <div class="min-w-0">
+                            <h4 class="font-bold text-xs sm:text-sm text-fluent-fg1">Période d'évaluation complète</h4>
+                            <p class="text-[11px] sm:text-xs text-fluent-fg3 mt-0.5">Testez la vitesse réelle sur votre catalogue avant de choisir une licence.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Formulaire Netlify Pro -->
-            <div class="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-200 shadow-xl" data-aos="fade-left">
-                <h3 class="text-xl font-bold text-slate-900">Recevoir le logiciel Woo Relay</h3>
-                <p class="text-xs text-slate-500 mt-1 mb-6">
-                    Remplissez ce formulaire : je vous contacte directement sur WhatsApp ou par téléphone pour vous transmettre votre lien de téléchargement.
+            <!-- Formulaire Netlify Forms (Sécurisé iOS & Fluent 2) -->
+            <div class="lg:col-span-6 bg-fluent-bg p-5 sm:p-8 rounded-fluentLg border border-fluent-stroke1 shadow-fluent8 min-w-0" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-lg sm:text-xl font-bold text-fluent-fg1">Demander mon accès</h3>
+                <p class="text-xs text-fluent-fg3 mt-1 mb-5">
+                    Renseignez vos coordonnées : je vous contacte sur WhatsApp ou téléphone pour vous transmettre l'installateur officiel et votre clé d'essai.
                 </p>
 
                 <form name="contact-woo-relay" method="POST" data-netlify="true" class="space-y-4">
                     <input type="hidden" name="form-name" value="contact-woo-relay" />
 
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Nom & Prénom *</label>
-                        <input type="text" name="nom" required class="w-full bg-[#F8FAFC] border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition" placeholder="Ex: Karim Benali" />
+                        <label class="block text-xs font-semibold text-fluent-fg2 mb-1">Nom complet *</label>
+                        <input type="text" name="nom" required class="fluent-input w-full bg-white rounded-fluentSm px-3 py-2 text-fluent-fg1" placeholder="Ex: Karim Benali" />
                     </div>
 
-                    <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Téléphone / WhatsApp *</label>
-                            <input type="tel" name="telephone" required class="w-full bg-[#F8FAFC] border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition" placeholder="05XX XX XX XX" />
+                            <label class="block text-xs font-semibold text-fluent-fg2 mb-1">Téléphone / WhatsApp *</label>
+                            <input type="tel" name="telephone" required class="fluent-input w-full bg-white rounded-fluentSm px-3 py-2 text-fluent-fg1" placeholder="05XX XX XX XX" />
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Format Windows souhaité</label>
-                            <select name="format_logiciel" class="w-full bg-[#F8FAFC] border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition">
-                                <option value="Installateur Windows (.exe)">Installateur officiel (.exe)</option>
-                                <option value="Version Portable (.zip)">Version Portable sans install (.zip)</option>
+                            <label class="block text-xs font-semibold text-fluent-fg2 mb-1">Transporteur principal</label>
+                            <select name="transporteur" class="fluent-input w-full bg-white rounded-fluentSm px-3 py-2 text-fluent-fg1">
+                                <option value="Yalidine Express">Yalidine Express</option>
+                                <option value="ZR Express">ZR Express</option>
+                                <option value="Maystro Delivery">Maystro Delivery</option>
+                                <option value="Procolis">Procolis</option>
+                                <option value="Autre / Aucun">Autre / Gestion de stock uniquement</option>
                             </select>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Transporteur utilisé (Optionnel)</label>
-                        <select name="transporteur" class="w-full bg-[#F8FAFC] border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition">
-                            <option value="Yalidine Express">Yalidine Express</option>
-                            <option value="ZR Express">ZR Express</option>
-                            <option value="Maystro Delivery">Maystro Delivery</option>
-                            <option value="Procolis">Procolis</option>
-                            <option value="Autre / Sans livraison API">Autre / Gestion de stock uniquement</option>
-                        </select>
+                        <label class="block text-xs font-semibold text-fluent-fg2 mb-1">Adresse de votre boutique WooCommerce (Optionnel)</label>
+                        <input type="text" name="boutique_url" class="fluent-input w-full bg-white rounded-fluentSm px-3 py-2 text-fluent-fg1" placeholder="https://maboutique.dz" />
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Nom ou URL de votre boutique (Optionnel)</label>
-                        <input type="text" name="boutique_url" class="w-full bg-[#F8FAFC] border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white transition" placeholder="Ex: maboutique.dz" />
-                    </div>
-
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md shadow-blue-600/15 cursor-pointer text-sm">
-                        Recevoir ma version d'essai (14 jours)
-                    </button>
-
-                    <p class="text-[11px] text-center text-slate-500 pt-1">
-                        🔒 Aucune clé API n'est demandée sur ce site. Compatible Windows 10 & Windows 11 (64-bit).
-                    </p>
-                </form>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-slate-200 py-10 text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-slate-900">Woo Relay</span>
-                <span>— Gestion de Stock & Commandes WooCommerce (Édition Professionnelle)</span>
-            </div>
-            <div class="font-mono">
-                Windows 10 & 11 (64-bit) • Formats .EXE & .ZIP
-            </div>
-        </div>
-    </footer>
-
-    <!-- SCRIPTS : Animations AOS + Synchronisation Decap CMS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 650, once: true });
-
-        // Chargement optionnel depuis content.json (si modifié via /admin Decap CMS)
-        fetch('content.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Pas de fichier JSON');
-                return response.json();
-            })
-            .then(data => {
-                if (data.hero_badge) document.getElementById('hero-badge').innerText = data.hero_badge;
-                if (data.hero_title) document.getElementById('hero-title').innerText = data.hero_title;
-                if (data.hero_description) document.getElementById('hero-desc').innerText = data.hero_description;
-                if (data.cta_button) document.getElementById('cta-btn').innerText = data.cta_button;
-                if (data.feature_1_title) document.getElementById('f1-title').innerText = data.feature_1_title;
-                if (data.feature_1_desc) document.getElementById('f1-desc').innerText = data.feature_1_desc;
-                if (data.feature_2_title) document.getElementById('f2-title').innerText = data.feature_2_title;
-                if (data.feature_2_desc) document.getElementById('f2-desc').innerText = data.feature_2_desc;
-                if (data.feature_3_title) document.getElementById('f3-title').innerText = data.feature_3_title;
-                if (data.feature_3_desc) document.getElementById('f3-desc').innerText = data.feature_3_desc;
-
-                // Si tu ajoutes une vraie capture d'écran dans /admin, elle remplace l'aperçu CSS
-                if (data.hero_image && data.hero_image.trim() !== "") {
-                    document.getElementById('hero-img').src = data.hero_image;
-                    document.getElementById('cms-image-wrapper').classList.remove('hidden');
-                    document.getElementById('default-ui-mockup').classList.add('hidden');
-                }
-            })
-            .catch(() => {});
-    </script>
-</body>
-</html>
+                    <button type="submit" class="w-full bg-fluent-brand hover:bg-fluent-brandHover active:bg-fluent-brandPressed text-white font-semibold py-3 rounded-fluentMd transition-colors shadow-fluent2 text-sm cursor-pointer mt-2">
+                        Recevoir l'installateur Windows (.exe)
