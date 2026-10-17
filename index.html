@@ -32,10 +32,13 @@
     }
     </script>
 
-    <!-- Google Fonts : Space Grotesk + IBM Plex Sans + IBM Plex Mono + Instrument Serif -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Librairie AOS (Animation robuste et sans bug d'invisibilité) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -104,19 +107,7 @@
             min-width: 0;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(28px) scale(0.985);
-            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        .delay-100 { transition-delay: 90ms; }
-
+        /* Physique des interactions UI au survol et au clic */
         .spring-card {
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                         box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -131,6 +122,7 @@
             transform: scale(0.97);
         }
 
+        /* Inputs sans zoom forcé sur iOS */
         .craft-input {
             border: 1px solid rgba(0, 0, 0, 0.12);
             background-color: #F6F6F8;
@@ -152,11 +144,10 @@
 </head>
 <body class="font-sans antialiased selection:bg-woo-tint selection:text-woo text-ink bg-white">
 
-    <!-- 1. NAVBAR FLOTTANTE CORRIGÉE (ANTIDÉBORDEMENT & ZERO COUPURE) -->
+    <!-- 1. NAVBAR FLOTTANTE -->
     <div class="fixed top-4 sm:top-5 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none">
         <nav class="max-w-4xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl px-3 sm:px-5 py-2.5 border border-line shadow-navbar flex items-center justify-between gap-2 sm:gap-4 pointer-events-auto">
             
-            <!-- Logo sécurisé anti-coupure -->
             <a href="#" class="flex items-center gap-2 shrink-0">
                 <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-shell border border-line flex items-center justify-center shadow-sm shrink-0">
                     <span class="font-display font-bold text-xs sm:text-sm text-woo">W</span>
@@ -166,7 +157,6 @@
                 </span>
             </a>
 
-            <!-- Liens de navigation (Visibles uniquement sur tablette et PC) -->
             <div class="hidden lg:flex items-center gap-6 text-xs font-medium text-body">
                 <a href="#features" class="hover:text-ink transition-colors whitespace-nowrap">Fonctionnalités</a>
                 <a href="#oms" class="hover:text-ink transition-colors whitespace-nowrap">Commandes</a>
@@ -174,7 +164,6 @@
                 <a href="#faq" class="hover:text-ink transition-colors whitespace-nowrap">FAQ</a>
             </div>
 
-            <!-- Boutons d'action à droite (Protégés contre le wrapping) -->
             <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <a href="https://wa.me/213797334505" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-block bg-shell hover:bg-black/5 text-ink text-xs font-medium px-3 sm:px-3.5 py-2 rounded-xl border border-line spring-btn whitespace-nowrap">
                     Contacter
@@ -186,11 +175,11 @@
         </nav>
     </div>
 
-    <!-- 2. HERO SECTION + MOCKUP MULTI-COUCHES -->
+    <!-- 2. HERO SECTION + MOCKUP -->
     <header class="pt-32 pb-16 sm:pt-40 sm:pb-28 relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             
-            <div class="max-w-3xl mx-auto text-center space-y-6 reveal active">
+            <div class="max-w-3xl mx-auto text-center space-y-6" data-aos="fade-up">
                 <div class="inline-flex items-center gap-2 bg-white border border-line shadow-badge px-3.5 py-1.5 rounded-full text-xs font-medium text-body">
                     <span class="w-2 h-2 rounded-full bg-woo"></span>
                     <span>Application Windows Native (.exe) • Zéro plugin WordPress</span>
@@ -215,11 +204,10 @@
             </div>
 
             <!-- DASHBOARD MOCKUP -->
-            <div class="mt-14 sm:mt-20 max-w-5xl mx-auto relative reveal delay-100">
+            <div class="mt-14 sm:mt-20 max-w-5xl mx-auto relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="bg-shell p-2.5 sm:p-4 rounded-[28px] border border-line shadow-heroMockup">
                     <div class="bg-white rounded-2xl border border-line overflow-hidden grid lg:grid-cols-12">
                         
-                        <!-- Sidebar Gauche -->
                         <div class="hidden lg:flex lg:col-span-2 bg-shell/60 border-r border-line p-4 flex-col justify-between">
                             <div class="space-y-4">
                                 <div class="flex items-center gap-2 px-2 py-1">
@@ -248,7 +236,6 @@
                             </div>
                         </div>
 
-                        <!-- Zone Centrale -->
                         <div class="lg:col-span-7 p-4 sm:p-6 space-y-5 border-b lg:border-b-0 lg:border-r border-line">
                             <div class="flex items-center justify-between">
                                 <div>
@@ -268,4 +255,613 @@
                                     </div>
                                     <div class="bg-white p-3 rounded-xl border border-line shadow-sm">
                                         <div class="text-[11px] text-muted">Marge Nette</div>
-                                        <div class="font-display font
+                                        <div class="font-display font-bold text-lg sm:text-xl text-ink mt-1">+39,4%</div>
+                                        <div class="text-[10px] font-mono text-woo mt-0.5">+48 500 DZD</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-xl border border-line shadow-sm">
+                                        <div class="text-[11px] text-muted">Charge MySQL</div>
+                                        <div class="font-display font-bold text-lg sm:text-xl text-ink mt-1">0,0%</div>
+                                        <div class="text-[10px] font-mono text-muted mt-0.5">Aucun plugin</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-xs font-semibold text-ink px-1">
+                                    <span>Édition rapide des stocks (Cliquez sur + ou -)</span>
+                                    <span class="font-mono text-[11px] text-muted">Sauvegarde instantanée</span>
+                                </div>
+
+                                <div class="bg-white p-3 rounded-xl border border-line shadow-sm flex items-center justify-between gap-2">
+                                    <div class="min-w-0">
+                                        <div class="font-semibold text-xs sm:text-sm text-ink truncate">Casque Studio Fermé Pro</div>
+                                        <div class="font-mono text-[11px] text-muted truncate">SKU-8841 • Achat : 4 200 DZD → Vente : 6 900 DZD</div>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 font-mono shrink-0">
+                                        <button onclick="ajusterStock('st-1', -1)" class="w-7 h-7 bg-shell hover:bg-black/10 border border-lineStrong rounded-lg text-ink font-bold cursor-pointer">-</button>
+                                        <span id="st-1" class="w-9 text-center py-1 bg-woo-tint text-woo font-bold rounded-lg text-xs">42</span>
+                                        <button onclick="ajusterStock('st-1', 1)" class="w-7 h-7 bg-shell hover:bg-black/10 border border-lineStrong rounded-lg text-ink font-bold cursor-pointer">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white p-3 rounded-xl border border-line shadow-sm flex items-center justify-between gap-2">
+                                    <div class="min-w-0">
+                                        <div class="font-semibold text-xs sm:text-sm text-ink truncate">Clavier Mécanique ISO Aluminium</div>
+                                        <div class="font-mono text-[11px] text-muted truncate">SKU-3109 • Achat : 5 500 DZD → Vente : 8 500 DZD</div>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 font-mono shrink-0">
+                                        <button onclick="ajusterStock('st-2', -1)" class="w-7 h-7 bg-shell hover:bg-black/10 border border-lineStrong rounded-lg text-ink font-bold cursor-pointer">-</button>
+                                        <span id="st-2" class="w-9 text-center py-1 bg-amber-50 text-amber-800 border border-amber-300 font-bold rounded-lg text-xs">03</span>
+                                        <button onclick="ajusterStock('st-2', 1)" class="w-7 h-7 bg-shell hover:bg-black/10 border border-lineStrong rounded-lg text-ink font-bold cursor-pointer">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-3 p-4 sm:p-5 bg-shell/30 flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="text-xs font-semibold text-ink flex items-center justify-between">
+                                    <span>Flux Commandes</span>
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                                </div>
+
+                                <div class="bg-white p-3 rounded-xl border border-line shadow-sm space-y-2">
+                                    <div class="flex items-center justify-between text-[11px] font-mono">
+                                        <span class="font-bold text-woo">#5204</span>
+                                        <span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full">Nouvelle</span>
+                                    </div>
+                                    <div class="text-xs font-semibold text-ink">Karim M. — 15 400 DZD</div>
+                                    <div class="text-[11px] text-muted">Marge nette : +5 900 DZD</div>
+                                </div>
+
+                                <div class="bg-white p-3 rounded-xl border border-line shadow-sm space-y-1.5">
+                                    <div class="flex items-center justify-between text-[11px] font-mono">
+                                        <span class="font-bold text-ink">#5203</span>
+                                        <span class="bg-shell text-body px-2 py-0.5 rounded-full">Terminée</span>
+                                    </div>
+                                    <div class="text-xs font-semibold text-ink">Yassine B. — 6 900 DZD</div>
+                                </div>
+                            </div>
+
+                            <a href="#telecharger" class="w-full block bg-ink hover:bg-black text-white text-center text-xs font-medium py-2.5 rounded-xl spring-btn">
+                                + Nouvelle Synchronisation
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- CARTE NOIRE FLOTTANTE -->
+                <div class="mt-4 lg:mt-0 lg:absolute lg:-bottom-6 lg:-left-5 z-20 bg-darkCard text-white p-4 rounded-2xl shadow-floatingDark max-w-xs mx-auto lg:mx-0">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-8 h-8 rounded-xl bg-woo flex items-center justify-center text-sm shrink-0">
+                            🔔
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Alerte sonore temps réel</div>
+                            <div class="text-[11px] text-white/60">Zéro retard d'e-mail SMTP</div>
+                        </div>
+                    </div>
+                    <button onclick="jouerCarillon()" class="w-full mt-1 bg-white hover:bg-shell text-ink font-semibold text-xs py-2 px-3 rounded-xl spring-btn cursor-pointer">
+                        🔊 Tester le son de notification
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. BENTO GRID -->
+    <section id="features" class="py-20 sm:py-28 max-w-6xl mx-auto px-4 sm:px-6 border-t border-line">
+        
+        <div class="max-w-2xl mx-auto text-center mb-14 sm:mb-16" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 bg-white border border-line shadow-badge px-3.5 py-1.5 rounded-full text-xs font-medium text-body mb-4">
+                <span>⚡</span>
+                <span>Pourquoi WooRelay est différent</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-bold text-ink leading-tight">
+                Tout ce que wp-admin vous fait perdre en temps, réglé en local.
+            </h2>
+            <p class="text-body text-base mt-3">
+                Pensé pour les gérants qui veulent de la vitesse, leurs vraies marges et zéro plugin lourd sur leur site.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            
+            <div class="bg-shell rounded-[28px] p-5 sm:p-7 border border-line shadow-bentoShell hover:shadow-bentoHover spring-card flex flex-col justify-between" data-aos="fade-up">
+                <div class="bg-white rounded-2xl p-5 border border-line shadow-innerCard mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-semibold text-ink">Rentabilité nette réelle</span>
+                        <span class="text-xs font-mono text-emerald-700 font-semibold">+39,4%</span>
+                    </div>
+                    <div class="relative h-36 w-full pt-6">
+                        <div class="absolute top-1 left-[42%] -translate-x-1/2 bg-ink text-white text-xs font-mono font-medium px-3 py-1.5 rounded-xl shadow-md">
+                            +48 500 DZD net
+                        </div>
+                        <svg class="w-full h-full overflow-visible" viewBox="0 0 400 100" fill="none">
+                            <path d="M 0 75 C 50 75, 70 30, 120 55 C 170 80, 190 20, 240 45 C 290 70, 330 15, 400 30" stroke="#111111" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="170" cy="48" r="5" fill="#7F54B3" stroke="#FFFFFF" stroke-width="2.5"/>
+                        </svg>
+                        <div class="flex justify-between text-[10px] font-mono text-muted border-t border-line pt-2 mt-1">
+                            <span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-ink mb-2">
+                        Calculez vos vraies marges nettes
+                    </h3>
+                    <p class="text-sm sm:text-base text-body leading-relaxed">
+                        Saisissez vos prix d'achat fournisseurs confidentiels dans WooRelay. Ils restent sur votre PC (jamais envoyés sur WordPress) et calculent votre bénéfice réel sur chaque produit.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-shell rounded-[28px] p-5 sm:p-7 border border-line shadow-bentoShell hover:shadow-bentoHover spring-card flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-white rounded-2xl p-5 border border-line shadow-innerCard mb-6 flex flex-col justify-center min-h-[200px]">
+                    <div class="flex items-center justify-between text-xs font-semibold text-ink mb-4">
+                        <span>Vitesse d'ajustement du stock</span>
+                        <span class="font-mono text-woo">SQLite 0,1s</span>
+                    </div>
+
+                    <div class="grid grid-cols-5 gap-2 text-center items-center py-2">
+                        <div class="py-2.5 rounded-xl bg-shell text-xs font-mono text-muted">
+                            <div class="text-[10px]">SKU</div>
+                            <div class="font-bold text-ink mt-0.5">18</div>
+                        </div>
+                        <div class="py-2.5 rounded-xl bg-shell text-xs font-mono text-muted">
+                            <div class="text-[10px]">SKU</div>
+                            <div class="font-bold text-ink mt-0.5">24</div>
+                        </div>
+                        <div class="py-3 rounded-2xl bg-woo text-white text-xs font-mono shadow-md scale-105">
+                            <div class="text-[10px] text-white/80">ACTIF</div>
+                            <div class="font-bold text-sm mt-0.5">42</div>
+                        </div>
+                        <div class="py-2.5 rounded-xl bg-shell text-xs font-mono text-muted">
+                            <div class="text-[10px]">SKU</div>
+                            <div class="font-bold text-ink mt-0.5">09</div>
+                        </div>
+                        <div class="py-2.5 rounded-xl bg-amber-50 border border-amber-200 text-xs font-mono text-amber-800">
+                            <div class="text-[10px]">ALERTE</div>
+                            <div class="font-bold mt-0.5">02</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-line flex items-center justify-between text-[11px] font-mono text-muted">
+                        <span>Mise à jour sans recharger la page</span>
+                        <span class="text-emerald-700 font-semibold">✓ Synchronisé</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-ink mb-2">
+                        Modifiez vos stocks sans ouvrir 50 onglets
+                    </h3>
+                    <p class="text-sm sm:text-base text-body leading-relaxed">
+                        Fini d'entrer dans chaque fiche produit WordPress et d'attendre 8 secondes la sauvegarde PHP. Tout votre catalogue répond instantanément au clavier ou à la souris.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bg-shell rounded-[28px] p-5 sm:p-8 border border-line shadow-bentoShell hover:shadow-bentoHover spring-card" data-aos="fade-up">
+            <div class="bg-white rounded-2xl p-5 sm:p-6 border border-line shadow-innerCard mb-6 space-y-3">
+                <div class="flex items-center justify-between text-xs text-muted font-mono mb-2">
+                    <span>CONNEXION DIRECTE SANS EXTENSION</span>
+                    <span>API REST WOOCOMMERCE NATIVE</span>
+                </div>
+
+                <div class="bg-shell/70 hover:bg-shell p-3.5 rounded-xl border border-line flex items-center justify-between gap-3 transition-colors">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="w-7 h-7 rounded-lg bg-ink text-white font-mono text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                        <span class="text-xs sm:text-sm font-semibold text-ink truncate">Générez une clé API standard dans vos réglages WooCommerce</span>
+                    </div>
+                    <span class="text-[11px] font-mono text-muted hidden sm:inline shrink-0">30 secondes</span>
+                </div>
+
+                <div class="bg-shell/70 hover:bg-shell p-3.5 rounded-xl border border-line flex items-center justify-between gap-3 transition-colors">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="w-7 h-7 rounded-lg bg-woo text-white font-mono text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                        <span class="text-xs sm:text-sm font-semibold text-ink truncate">Collez la clé dans WooRelay sur Windows — votre catalogue s'affiche en 0,1s</span>
+                    </div>
+                    <span class="text-[11px] font-mono text-emerald-700 font-semibold hidden sm:inline shrink-0">Zéro plugin ajouté</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-ink mb-2">
+                    Zéro plugin lourd installé sur votre serveur WordPress
+                </h3>
+                <p class="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
+                    Votre boutique reste propre et rapide pour vos visiteurs. WooRelay utilise exclusivement l'API REST native déjà intégrée à WooCommerce et chiffre vos clés en local (AES-256-GCM).
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 4. SECTION COMMANDES -->
+    <section id="oms" class="py-20 sm:py-28 max-w-6xl mx-auto px-4 sm:px-6 border-t border-line">
+        
+        <div class="max-w-2xl mb-12 space-y-4" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 bg-white border border-line shadow-badge px-3.5 py-1.5 rounded-full text-xs font-medium text-body">
+                <span>🔔</span>
+                <span>Gestion des commandes en temps réel</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-bold text-ink leading-tight">
+                Traitez vos commandes, sans le chaos.
+            </h2>
+            <p class="text-body text-base leading-relaxed">
+                Soyez alerté par un carillon sonore dès qu'un client commande, changez le statut en un clic et lancez la confirmation WhatsApp sans jongler entre vos onglets.
+            </p>
+            <div class="pt-2">
+                <a href="#telecharger" class="inline-block bg-ink hover:bg-black text-white font-medium text-sm px-6 py-3 rounded-2xl ring-4 ring-black/10 spring-btn">
+                    Tester sur ma boutique
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-shell rounded-[28px] p-4 sm:p-7 border border-line shadow-bentoShell space-y-3.5" data-aos="fade-up" data-aos-delay="100">
+            
+            <div class="bg-white p-4 sm:px-6 rounded-2xl border border-line shadow-innerCard flex items-center justify-between gap-4">
+                <div>
+                    <div class="font-bold text-sm sm:text-base text-ink">Détection sonore des nouvelles commandes</div>
+                    <div class="text-xs text-muted">Joue un carillon discret sur Windows dès qu'une vente arrive</div>
+                </div>
+                <button id="toggle-sound" onclick="basculerSwitchSon()" class="w-12 h-7 bg-emerald-500 rounded-full p-1 flex items-center justify-end transition-colors cursor-pointer shrink-0" aria-label="Activer l'alerte sonore">
+                    <span class="w-5 h-5 bg-white rounded-full shadow-sm"></span>
+                </button>
+            </div>
+
+            <div class="bg-white p-4 sm:px-6 rounded-2xl border border-line shadow-innerCard flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="w-10 h-10 rounded-full bg-woo-tint text-woo font-display font-bold text-sm flex items-center justify-center shrink-0">
+                        KM
+                    </div>
+                    <div class="min-w-0">
+                        <div class="font-bold text-sm text-ink truncate">Commande #5204 — Karim M.</div>
+                        <div class="text-xs font-mono text-muted truncate">2 articles • Total : 15 400 DZD • Marge nette : +5 900 DZD</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-mono font-medium px-3 py-1 rounded-full">
+                        En cours
+                    </span>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 sm:px-6 rounded-2xl border border-line shadow-innerCard flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3.5 min-w-0">
+                    <div class="w-10 h-10 rounded-full bg-shell text-ink font-display font-bold text-sm flex items-center justify-center border border-line shrink-0">
+                        YB
+                    </div>
+                    <div class="min-w-0">
+                        <div class="font-bold text-sm text-ink truncate">Commande #5203 — Yassine B.</div>
+                        <div class="text-xs font-mono text-muted truncate">1 article • Total : 6 900 DZD • Marge nette : +2 700 DZD</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <span class="bg-shell text-body border border-line text-xs font-mono font-medium px-3 py-1 rounded-full">
+                        Terminée
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. SECTION COMPARATIVE -->
+    <section id="comparatif" class="py-20 sm:py-28 max-w-5xl mx-auto px-4 sm:px-6 border-t border-line">
+        <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 bg-white border border-line shadow-badge px-3.5 py-1.5 rounded-full text-xs font-medium text-body mb-4">
+                <span>⇄</span>
+                <span>Comparaison</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-bold text-ink leading-tight">
+                Pourquoi les e-commerçants passent sur WooRelay
+            </h2>
+            <p class="text-body text-base mt-3">
+                Gardez WooCommerce pour encaisser vos ventes, mais libérez-vous de la lourdeur de son tableau de bord.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-start">
+            
+            <div class="space-y-4" data-aos="fade-up">
+                <div class="text-center font-serifItalic italic text-2xl text-muted">
+                    Avant
+                </div>
+                <div class="bg-shell rounded-[28px] p-6 sm:p-8 border border-line shadow-bentoShell">
+                    <h3 class="text-2xl font-bold text-ink text-center mb-6">Dans wp-admin</h3>
+                    <div class="bg-white/70 rounded-2xl p-5 border border-line space-y-4 text-sm text-body">
+                        <div class="flex items-start gap-3">
+                            <span class="text-muted font-bold">✕</span>
+                            <span>6 à 10 secondes d'attente pour ouvrir ou enregistrer une fiche produit</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-muted font-bold">✕</span>
+                            <span>Aucun calcul de marge nette sans installer des plugins usines à gaz</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-muted font-bold">✕</span>
+                            <span>Obligation de laisser un onglet navigateur ouvert ou d'attendre les e-mails</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-muted font-bold">✕</span>
+                            <span>Chaque modification admin consomme la mémoire PHP de vos visiteurs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-center font-serifItalic italic text-2xl text-woo">
+                    Avec WooRelay
+                </div>
+                <div class="bg-shell rounded-[28px] p-6 sm:p-8 border-2 border-woo/30 shadow-bentoHover">
+                    <h3 class="text-2xl font-bold text-ink text-center mb-6">Application Windows</h3>
+                    <div class="bg-white rounded-2xl p-5 border border-line shadow-innerCard space-y-4 text-sm text-ink">
+                        <div class="flex items-start gap-3">
+                            <span class="text-woo font-bold">✓</span>
+                            <span><strong>0,1 seconde :</strong> Modification instantanée des stocks et prix en grille</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-woo font-bold">✓</span>
+                            <span><strong>Marges réelles :</strong> Coûts d'achat stockés en privé sur votre PC</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-woo font-bold">✓</span>
+                            <span><strong>Carillon instantané :</strong> Notification sonore dès qu'une commande tombe</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-woo font-bold">✓</span>
+                            <span><strong>Zéro plugin :</strong> Aucune extension installée sur votre WordPress</span>
+                        </div>
+
+                        <div class="pt-3">
+                            <a href="#telecharger" class="w-full block bg-woo hover:bg-woo-hover text-white text-center font-medium py-3.5 rounded-xl shadow-sm spring-btn">
+                                Obtenir l'installateur (.exe)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. ACCORDÉON FAQ -->
+    <section id="faq" class="py-20 sm:py-28 max-w-3xl mx-auto px-4 sm:px-6 border-t border-line">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 bg-white border border-line shadow-badge px-3.5 py-1.5 rounded-full text-xs font-medium text-body mb-3">
+                <span>?</span>
+                <span>Questions fréquentes</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-ink">
+                Tout savoir avant d'installer
+            </h2>
+        </div>
+
+        <div class="space-y-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-shell rounded-2xl border border-line overflow-hidden">
+                <button onclick="basculerFaq(1)" class="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+                    <span class="font-semibold text-sm sm:text-base text-ink">Dois-je installer une extension sur mon WordPress ?</span>
+                    <span id="faq-icon-1" class="w-7 h-7 rounded-full bg-white border border-line flex items-center justify-center font-mono text-sm text-ink shrink-0 transition-transform">+</span>
+                </button>
+                <div id="faq-content-1" class="hidden px-5 pb-5 text-sm text-body leading-relaxed border-t border-line pt-3">
+                    Non, aucune. WooRelay se connecte directement à l'API REST native déjà présente dans toutes les boutiques WooCommerce. Votre serveur reste léger.
+                </div>
+            </div>
+
+            <div class="bg-shell rounded-2xl border border-line overflow-hidden">
+                <button onclick="basculerFaq(2)" class="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+                    <span class="font-semibold text-sm sm:text-base text-ink">Mes prix d'achat fournisseurs sont-ils envoyés en ligne ?</span>
+                    <span id="faq-icon-2" class="w-7 h-7 rounded-full bg-white border border-line flex items-center justify-center font-mono text-sm text-ink shrink-0 transition-transform">+</span>
+                </button>
+                <div id="faq-content-2" class="hidden px-5 pb-5 text-sm text-body leading-relaxed border-t border-line pt-3">
+                    Jamais. Vos coûts d'achat et calculs de marge nette sont enregistrés uniquement dans la base SQLite locale sur votre ordinateur Windows.
+                </div>
+            </div>
+
+            <div class="bg-shell rounded-2xl border border-line overflow-hidden">
+                <button onclick="basculerFaq(3)" class="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+                    <span class="font-semibold text-sm sm:text-base text-ink">Comment fonctionne la période d'essai de 14 jours ?</span>
+                    <span id="faq-icon-3" class="w-7 h-7 rounded-full bg-white border border-line flex items-center justify-center font-mono text-sm text-ink shrink-0 transition-transform">+</span>
+                </button>
+                <div id="faq-content-3" class="hidden px-5 pb-5 text-sm text-body leading-relaxed border-t border-line pt-3">
+                    Vous recevez l'installateur officiel Windows (`.exe`) et une clé d'activation de 14 jours sans restriction pour tester la vitesse sur votre vrai catalogue.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. TÉLÉCHARGEMENT & CONTACT -->
+    <section id="telecharger" class="py-20 sm:py-28 max-w-5xl mx-auto px-4 sm:px-6 border-t border-line">
+        <div class="bg-shell rounded-[32px] p-6 sm:p-10 border border-line shadow-bentoShell grid lg:grid-cols-12 gap-10 items-start" data-aos="fade-up">
+            
+            <div class="lg:col-span-6 space-y-5">
+                <div class="inline-flex items-center gap-2 bg-white border border-line shadow-badge px-3 py-1 rounded-full text-xs font-mono text-woo font-medium">
+                    Essai Gratuit 14 Jours
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-ink">
+                    Recevoir l'installateur Windows (.exe)
+                </h2>
+                <p class="text-sm sm:text-base text-body leading-relaxed">
+                    Remplissez ce formulaire pour recevoir votre lien de téléchargement et votre clé d'essai, ou contactez-moi directement en un clic :
+                </p>
+
+                <div class="bg-white p-5 rounded-2xl border border-line shadow-innerCard space-y-3">
+                    <div class="text-xs font-mono uppercase text-muted font-medium">Contact Direct</div>
+                    <div class="flex flex-col sm:flex-row flex-wrap gap-2.5">
+                        <a href="https://wa.me/213797334505" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl spring-btn">
+                            <span>💬</span> WhatsApp : +213 797 33 45 05
+                        </a>
+                        <a href="mailto:rafikbenbey@gmail.com?subject=Demande%20Installateur%20WooRelay" class="inline-flex items-center justify-center gap-2 bg-shell hover:bg-black/5 text-ink border border-lineStrong text-xs sm:text-sm font-medium px-4 py-2.5 rounded-xl spring-btn">
+                            <span>✉️</span> rafikbenbey@gmail.com
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5 text-xs font-mono text-muted pt-1">
+                    <div>✓ Compatible Windows 10 & Windows 11 (64-bit)</div>
+                    <div>✓ Clés API chiffrées localement (AES-256-GCM)</div>
+                    <div>✓ Aucune carte bancaire requise</div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-line shadow-innerCard">
+                <form name="contact-woo-relay" method="POST" data-netlify="true" class="space-y-4">
+                    <input type="hidden" name="form-name" value="contact-woo-relay" />
+
+                    <div>
+                        <label for="champ-tel" class="block text-xs font-mono uppercase text-body font-medium mb-1.5">
+                            Votre numéro WhatsApp ou Téléphone *
+                        </label>
+                        <input id="champ-tel" type="tel" name="telephone" required autocomplete="tel" class="craft-input w-full rounded-xl px-3.5 py-3 text-ink" />
+                    </div>
+
+                    <div>
+                        <label for="champ-email" class="block text-xs font-mono uppercase text-body font-medium mb-1.5">
+                            Votre adresse e-mail *
+                        </label>
+                        <input id="champ-email" type="email" name="email" required autocomplete="email" class="craft-input w-full rounded-xl px-3.5 py-3 text-ink" />
+                    </div>
+
+                    <div>
+                        <label for="champ-url" class="block text-xs font-mono uppercase text-body font-medium mb-1.5">
+                            URL de votre boutique WooCommerce (optionnel)
+                        </label>
+                        <input id="champ-url" type="text" name="boutique_url" autocomplete="url" class="craft-input w-full rounded-xl px-3.5 py-3 text-ink" />
+                    </div>
+
+                    <button type="submit" class="w-full bg-woo hover:bg-woo-hover text-white font-medium py-3.5 px-6 rounded-xl ring-4 ring-woo/15 spring-btn text-sm sm:text-base cursor-pointer mt-2">
+                        Envoyer ma demande (.exe)
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. FOOTER SOMBRE -->
+    <footer class="bg-darkFooter text-white pt-16 pb-12 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+                
+                <div class="md:col-span-5 space-y-3">
+                    <div class="font-display font-bold text-2xl tracking-tight text-white">
+                        <span class="text-woo">Woo</span>Relay
+                    </div>
+                    <p class="text-white/60 text-sm max-w-sm leading-relaxed">
+                        Conçu pour aider les e-commerçants WooCommerce à gérer leurs stocks, leurs marges et leurs commandes à la vitesse d'un logiciel local.
+                    </p>
+                </div>
+
+                <div class="md:col-span-3 space-y-2.5 text-sm">
+                    <div class="font-semibold text-white mb-3">Navigation</div>
+                    <div><a href="#features" class="text-white/60 hover:text-white transition-colors">Fonctionnalités</a></div>
+                    <div><a href="#oms" class="text-white/60 hover:text-white transition-colors">Commandes en direct</a></div>
+                    <div><a href="#comparatif" class="text-white/60 hover:text-white transition-colors">Comparatif</a></div>
+                    <div><a href="#faq" class="text-white/60 hover:text-white transition-colors">Questions fréquentes</a></div>
+                </div>
+
+                <div class="md:col-span-4 space-y-2.5 text-sm">
+                    <div class="font-semibold text-white mb-3">Contact Direct</div>
+                    <div>
+                        <a href="https://wa.me/213797334505" target="_blank" rel="noopener noreferrer" class="text-white/60 hover:text-white transition-colors">
+                            WhatsApp : +213 797 33 45 05
+                        </a>
+                    </div>
+                    <div>
+                        <a href="mailto:rafikbenbey@gmail.com" class="text-white/60 hover:text-white transition-colors">
+                            Email : rafikbenbey@gmail.com
+                        </a>
+                    </div>
+                    <div class="pt-2">
+                        <a href="#telecharger" class="inline-block bg-woo hover:bg-woo-hover text-white text-xs font-medium px-4 py-2 rounded-lg spring-btn">
+                            Télécharger l'essai 14 jours
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50 font-mono">
+                <div>
+                    © 2026 WooRelay. Application Windows 10 & 11 (x64).
+                </div>
+                <div class="text-white/80">
+                    Créé par <span class="text-white font-semibold underline decoration-woo underline-offset-4">Digital Design DZ</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS AOS ET INTERACTIONS -->
+    <!-- Librairie AOS (Animation robuste) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialisation propre de l'animation au scroll
+        AOS.init({ duration: 600, once: true, offset: 50 });
+
+        function ajusterStock(id, delta) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var actuel = parseInt(el.innerText, 10) || 0;
+            var nouveau = Math.max(0, actuel + delta);
+            el.innerText = nouveau < 10 ? '0' + nouveau : nouveau;
+        }
+
+        var sonActif = true;
+        function basculerSwitchSon() {
+            var btn = document.getElementById('toggle-sound');
+            sonActif = !sonActif;
+            if (sonActif) {
+                btn.className = 'w-12 h-7 bg-emerald-500 rounded-full p-1 flex items-center justify-end transition-colors cursor-pointer shrink-0';
+                jouerCarillon();
+            } else {
+                btn.className = 'w-12 h-7 bg-black/20 rounded-full p-1 flex items-center justify-start transition-colors cursor-pointer shrink-0';
+            }
+        }
+
+        function basculerFaq(num) {
+            var content = document.getElementById('faq-content-' + num);
+            var icon = document.getElementById('faq-icon-' + num);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '−';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        function jouerCarillon() {
+            try {
+                var AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                var ctx = new AudioCtx();
+                var notes = [523.25, 659.25];
+                var delais = [0, 0.11];
+
+                notes.forEach(function(freq, i) {
+                    var osc = ctx.createOscillator();
+                    var gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + delais[i]);
+                    gain.gain.setValueAtTime(0, ctx.currentTime + delais[i]);
+                    gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + delais[i] + 0.015);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + delais[i] + 0.4);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + delais[i]);
+                    osc.stop(ctx.currentTime + delais[i] + 0.45);
+                });
+            } catch (e) {}
+        }
+    </script>
+</body>
+</html>
