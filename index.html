@@ -3,32 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>WooRelay — Le centre de commande Windows pour WooCommerce (0,1s)</title>
-    <meta name="description" content="Déportez vos stocks, calculs de marges et alertes de commandes WooCommerce sur un logiciel Windows ultra-rapide via SQLite. Zéro plugin à installer sur WordPress.">
+    
+    <!-- SEO Primaire -->
+    <title>WooRelay | Logiciel Windows de Gestion Stock & Commandes WooCommerce</title>
+    <meta name="description" content="Déportez la gestion de votre boutique WooCommerce sur un logiciel Windows ultra-rapide via SQLite. Stocks, marges et commandes en temps réel. Zéro plugin requis.">
+    <meta name="keywords" content="logiciel WooCommerce, gestion stock WooCommerce, client lourd WordPress, WooCommerce Windows, ERP WooCommerce local, Digital Design Dz">
+    <meta name="author" content="Digital Design Dz - Rafik Benbey">
     <link rel="canonical" href="https://woorelay.netlify.app/">
 
-    <!-- Open Graph -->
+    <!-- Open Graph (Pour de beaux aperçus sur LinkedIn, Facebook, WhatsApp) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="WooRelay — WooCommerce sur Windows en 0,1s">
-    <meta property="og:description" content="Oubliez la lenteur de wp-admin. Modifiez vos stocks et pilotez vos marges réelles depuis une application Windows native branchée en REST API.">
+    <meta property="og:site_name" content="WooRelay">
+    <meta property="og:title" content="WooRelay | Logiciel Windows pour WooCommerce">
+    <meta property="og:description" content="Oubliez la lenteur de wp-admin. Modifiez vos stocks et pilotez vos marges réelles depuis une application Windows native en 0,1s.">
     <meta property="og:url" content="https://woorelay.netlify.app/">
+    <meta property="og:image" content="https://woorelay.netlify.app/app-stock.png">
+    <meta property="og:locale" content="fr_FR">
 
-    <!-- Schema.org -->
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WooRelay | Logiciel Windows pour WooCommerce">
+    <meta name="twitter:description" content="Oubliez la lenteur de wp-admin. Modifiez vos stocks et pilotez vos marges en local.">
+    <meta name="twitter:image" content="https://woorelay.netlify.app/app-stock.png">
+
+    <!-- Schema.org (Données structurées pour Google Rich Snippets) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "WooRelay",
-      "operatingSystem": "Windows 10, Windows 11 (64-bit)",
-      "applicationCategory": "BusinessApplication",
-      "description": "Application desktop Windows pour gérer les stocks, marges et commandes WooCommerce sans ralentir WordPress.",
-      "fileFormat": "application/x-msdownload",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "DZD",
-        "description": "Évaluation complète de 14 jours (Installateur .exe)"
-      }
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "WooRelay",
+          "operatingSystem": "Windows 10, Windows 11 (64-bit)",
+          "applicationCategory": "BusinessApplication",
+          "description": "Application desktop Windows pour gérer les stocks, marges et commandes WooCommerce sans ralentir WordPress.",
+          "fileFormat": "application/x-msdownload",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "DZD",
+            "description": "Essai gratuit 14 jours (Installateur .exe)"
+          },
+          "creator": {
+            "@type": "Organization",
+            "name": "Digital Design Dz",
+            "url": "https://woorelay.netlify.app/"
+          }
+        }
+      ]
     }
     </script>
 
@@ -37,7 +59,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Librairie AOS (Animation robuste) -->
+    <!-- Librairie AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Tailwind CSS -->
@@ -47,38 +69,19 @@
             theme: {
                 extend: {
                     colors: {
-                        canvas: '#FFFFFF',
-                        shell: '#F6F6F8',
-                        surface: '#FFFFFF',
-                        ink: '#111111',
-                        body: '#52525B',
-                        muted: '#8E8E93',
-                        line: 'rgba(0, 0, 0, 0.07)',
-                        lineStrong: 'rgba(0, 0, 0, 0.12)',
-                        darkCard: '#161618',
-                        darkFooter: '#111113',
-                        appDark: '#171721',
-                        appDarkBorder: '#2A2A35',
-                        woo: {
-                            DEFAULT: '#6366F1',
-                            hover: '#4F46E5',
-                            active: '#4338CA',
-                            tint: '#EEF2FF'
-                        }
+                        canvas: '#FFFFFF', shell: '#F6F6F8', surface: '#FFFFFF', ink: '#111111', body: '#52525B', muted: '#8E8E93',
+                        line: 'rgba(0, 0, 0, 0.07)', lineStrong: 'rgba(0, 0, 0, 0.12)', darkCard: '#161618', darkFooter: '#111113',
+                        appDark: '#171721', appDarkBorder: '#2A2A35',
+                        woo: { DEFAULT: '#6366F1', hover: '#4F46E5', active: '#4338CA', tint: '#EEF2FF' }
                     },
                     fontFamily: {
-                        display: ['"Space Grotesk"', 'sans-serif'],
-                        sans: ['"IBM Plex Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-                        mono: ['"IBM Plex Mono"', 'monospace'],
-                        serifItalic: ['"Instrument Serif"', 'serif']
+                        display: ['"Space Grotesk"', 'sans-serif'], sans: ['"IBM Plex Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"IBM Plex Mono"', 'monospace'], serifItalic: ['"Instrument Serif"', 'serif']
                     },
                     boxShadow: {
-                        navbar: '0 4px 24px -2px rgba(0, 0, 0, 0.06), 0 1px 4px -1px rgba(0, 0, 0, 0.04)',
-                        badge: '0 2px 8px -1px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04)',
-                        innerCard: '0 4px 16px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04)',
-                        bentoShell: '0 1px 3px rgba(0, 0, 0, 0.03), 0 12px 32px -6px rgba(0, 0, 0, 0.05)',
-                        bentoHover: '0 4px 12px rgba(0, 0, 0, 0.04), 0 24px 48px -12px rgba(0, 0, 0, 0.09)',
-                        heroMockup: '0 24px 64px -12px rgba(0, 0, 0, 0.15), 0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.08)',
+                        navbar: '0 4px 24px -2px rgba(0, 0, 0, 0.06), 0 1px 4px -1px rgba(0, 0, 0, 0.04)', badge: '0 2px 8px -1px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04)',
+                        innerCard: '0 4px 16px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04)', bentoShell: '0 1px 3px rgba(0, 0, 0, 0.03), 0 12px 32px -6px rgba(0, 0, 0, 0.05)',
+                        bentoHover: '0 4px 12px rgba(0, 0, 0, 0.04), 0 24px 48px -12px rgba(0, 0, 0, 0.09)', heroMockup: '0 24px 64px -12px rgba(0, 0, 0, 0.15), 0 8px 24px -4px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.08)',
                         floatingDark: '0 20px 40px -8px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1)'
                     }
                 }
@@ -92,16 +95,13 @@
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; }
         h1, h2, h3, h4, p, span, a, div, td, th, label, button { overflow-wrap: anywhere; word-break: break-word; }
         .flex > * { min-width: 0; }
-        
         .spring-card { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
         .spring-card:hover { transform: translateY(-4px); }
         .spring-btn { transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
         .spring-btn:active { transform: scale(0.97); }
-
         .craft-input { border: 1px solid rgba(0, 0, 0, 0.12); background-color: #F6F6F8; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); font-size: 16px; }
         @media (min-width: 640px) { .craft-input { font-size: 0.9375rem; } }
         .craft-input:focus { background-color: #FFFFFF; border-color: #6366F1; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.14); outline: none; }
-        
         .mockup-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.1) transparent; }
         .mockup-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
         .mockup-scroll::-webkit-scrollbar-track { background: transparent; }
