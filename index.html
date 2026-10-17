@@ -27,6 +27,7 @@
     <meta name="twitter:image" content="https://woorelay.netlify.app/app-stock.png">
 
     <!-- Schema.org (Données structurées pour Google Rich Snippets) -->
+   <!-- Schema.org (Données structurées liées à la Fiche d'établissement Google) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -42,13 +43,35 @@
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "DZD",
-            "description": "Essai gratuit 14 jours (Installateur .exe)"
+            "description": "Évaluation complète de 14 jours (Installateur .exe)"
           },
           "creator": {
-            "@type": "Organization",
-            "name": "Digital Design Dz",
-            "url": "https://woorelay.netlify.app/"
+            "@id": "https://digitaldesigndz.framer.website/#organization"
           }
+        },
+        {
+          "@type": ["WebDesignCompany", "LocalBusiness", "Organization"],
+          "@id": "https://digitaldesigndz.framer.website/#organization",
+          "name": "Digital Design Dz",
+          "description": "UX/UI & Web Designer auto-entrepreneur. Création de plateformes sur mesure (WordPress/WooCommerce, Framer) et développement de solutions logicielles.",
+          "url": "https://digitaldesigndz.framer.website/",
+          "telephone": "+213797334505",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Koléa",
+            "addressRegion": "Tipaza",
+            "addressCountry": "DZ"
+          },
+          "areaServed": [
+            "Koléa, Algérie",
+            "Tipaza, Algérie",
+            "Alger, Algérie",
+            "Blida, Algérie"
+          ],
+          "sameAs": [
+            "https://maps.google.com/maps?cid=6448946409074351221",
+            "https://www.linkedin.com/in/rafik-benbey/"
+          ]
         }
       ]
     }
