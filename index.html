@@ -37,7 +37,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Librairie AOS -->
+    <!-- Librairie AOS (Animation robuste) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Tailwind CSS -->
@@ -102,7 +102,6 @@
         @media (min-width: 640px) { .craft-input { font-size: 0.9375rem; } }
         .craft-input:focus { background-color: #FFFFFF; border-color: #6366F1; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.14); outline: none; }
         
-        /* Scrollbars customisées pour les zones tactiles / scrollables des mockups */
         .mockup-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.1) transparent; }
         .mockup-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
         .mockup-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -142,7 +141,7 @@
         </nav>
     </div>
 
-    <!-- 2. HERO SECTION + MOCKUP PUR HTML -->
+    <!-- 2. HERO SECTION + VRAIE IMAGE app-stock.png -->
     <header class="pt-32 pb-16 sm:pt-40 sm:pb-28 relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             
@@ -170,157 +169,14 @@
                 </div>
             </div>
 
-            <!-- MOCKUP HTML : Interface Desktop (Responsive) -->
             <div class="mt-14 sm:mt-20 max-w-5xl mx-auto relative" data-aos="fade-up" data-aos-delay="100">
-                <div class="bg-appDark rounded-t-[20px] rounded-b-[20px] shadow-heroMockup overflow-hidden border border-black/20 flex flex-col font-sans">
-                    
-                    <!-- Barre de titre Windows -->
-                    <div class="h-8 flex justify-between items-center px-4 bg-[#0D0D12]">
-                        <div class="flex items-center gap-2 text-[#A1A1AA] text-[10px] truncate">
-                            <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                            <span class="truncate">WooRelay - Gestion de Stock & Commandes</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-[#A1A1AA] shrink-0">
-                            <span class="text-xs">─</span><span class="text-[10px]">□</span><span class="text-xs">✕</span>
-                        </div>
-                    </div>
-
-                    <!-- En-tête Application (Dark Mode + Swipe mobile) -->
-                    <div class="bg-appDark px-4 py-3 flex items-center gap-6 overflow-x-auto mockup-scroll border-b border-appDarkBorder whitespace-nowrap">
-                        
-                        <div class="flex items-center gap-3 shrink-0 relative pr-4">
-                            <div class="w-10 h-10 rounded-xl bg-[#6366F1] flex items-center justify-center">
-                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <div class="leading-tight">
-                                <div class="text-white font-bold text-lg">WooRelay</div>
-                                <div class="text-[#81819A] text-[10px]">Stock & Commandes sans plugin</div>
-                            </div>
-                            <div class="absolute -top-1 right-0 bg-[#3730A3] text-white text-[9px] px-2 py-0.5 rounded-full border border-[#4F46E5]/50 flex flex-col items-center leading-none">
-                                <span>Relais</span><span>Local</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-2 shrink-0">
-                            <div class="bg-[#5B5CE6] text-white px-4 py-2.5 rounded-lg flex items-center gap-3 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                                <span class="font-medium text-sm">Stock & Produits</span>
-                                <span class="bg-black/20 px-2 py-0.5 rounded-full text-xs">0</span>
-                            </div>
-                            <div class="text-[#A1A1AA] hover:bg-white/5 px-4 py-2.5 rounded-lg flex items-center gap-2 cursor-pointer transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                                <span class="font-medium text-sm">Commandes</span>
-                            </div>
-                            <div class="text-[#A1A1AA] hover:bg-white/5 px-4 py-2.5 rounded-lg flex items-center gap-2 cursor-pointer transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                                <span class="font-medium text-sm">Statistiques</span>
-                            </div>
-                            <div class="text-[#A1A1AA] hover:bg-white/5 px-4 py-2.5 rounded-lg flex items-center gap-2 cursor-pointer transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <span class="font-medium text-sm leading-tight text-center">Connexion &<br>Réglages</span>
-                            </div>
-                        </div>
-
-                        <!-- Spacer caché sur mobile si ça déborde -->
-                        <div class="flex-grow hidden lg:block"></div>
-
-                        <div class="flex items-center gap-3 shrink-0 ml-4 lg:ml-0">
-                            <div class="bg-[#2A2A35] text-[#A1A1AA] px-3 py-1.5 rounded-full flex items-center gap-2 text-xs border border-white/5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Essai : 6j restants
-                            </div>
-                            <div class="bg-[#2A2A35] text-[#A1A1AA] px-3 py-1.5 rounded-full flex items-center gap-2 text-xs border border-white/5 hidden sm:flex">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Clés requises
-                            </div>
-                            <div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-[#A1A1AA]">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Corps de l'application (Light Mode) -->
-                    <div class="bg-[#FAFAFA] flex-1 p-4 sm:p-6 pb-12">
-                        
-                        <!-- Barre de recherche -->
-                        <div class="flex flex-wrap items-center gap-4 mb-4">
-                            <div class="flex-1 min-w-[240px] bg-white border border-[#E4E4E7] rounded-lg px-3 py-2 flex items-center gap-2 shadow-sm">
-                                <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                <input type="text" placeholder="Recherche instantanée (Nom du produit, SKU...)" class="w-full text-sm outline-none text-gray-700 bg-transparent truncate" readonly>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs text-gray-500 font-medium hidden sm:inline">Catégorie :</span>
-                                <div class="bg-white border border-[#E4E4E7] rounded-lg px-3 py-2 flex items-center justify-between gap-4 text-sm text-gray-700 shadow-sm w-full sm:w-[180px]">
-                                    <span class="truncate">Toutes les catégories</span>
-                                    <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
-                            </div>
-                            <button class="bg-[#5B5CE6] text-white rounded-lg px-4 py-2 flex items-center gap-2 text-sm font-medium shadow-sm w-full sm:w-auto justify-center">
-                                <span>+</span> Nouveau Produit
-                            </button>
-                        </div>
-
-                        <!-- Filtres pilules (Swipe sur mobile) -->
-                        <div class="overflow-x-auto mockup-scroll mb-6 pb-2">
-                            <div class="flex items-center gap-2 min-w-max">
-                                <div class="bg-[#5B5CE6] text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">Tous (0)</div>
-                                <div class="bg-white border border-[#E4E4E7] text-gray-600 px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span> En Rupture (0)
-                                </div>
-                                <div class="bg-white border border-[#E4E4E7] text-gray-600 px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Stock Faible (0)
-                                </div>
-                                <div class="bg-white border border-[#E4E4E7] text-gray-600 px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> En Stock (0)
-                                </div>
-                                <div class="bg-white border border-[#E4E4E7] text-gray-600 px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 shadow-sm">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-purple-300"></span> Masqués / Brouillons (0)
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Zone de données avec swipe anti-casse sur mobile -->
-                        <div class="bg-white border border-[#E4E4E7] rounded-xl flex flex-col overflow-hidden min-h-[350px]">
-                            
-                            <div class="overflow-x-auto mockup-scroll flex-1 flex flex-col">
-                                <!-- Ligne minimale très large pour forcer le scroll au lieu d'écraser -->
-                                <div class="min-w-[750px] flex-1 flex flex-col">
-                                    <div class="grid grid-cols-7 gap-4 px-6 py-4 border-b border-[#E4E4E7] text-[11px] font-bold text-[#81819A] tracking-wider uppercase">
-                                        <div class="col-span-1">PHOTO</div>
-                                        <div class="col-span-1">RÉF & CATÉGORIE</div>
-                                        <div class="col-span-1">NOM DU PRODUIT</div>
-                                        <div class="col-span-1 text-center">PRIX & MARGE</div>
-                                        <div class="col-span-1 text-center">DISPONIBILITÉ<br>STOCK</div>
-                                        <div class="col-span-1 text-center">VENTES &<br>COMMANDES</div>
-                                        <div class="col-span-1 flex justify-between">
-                                            <span>VISIBILITÉ</span>
-                                            <span>ACTION</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex-1 flex flex-col items-center justify-center py-20 text-center">
-                                        <svg class="w-12 h-12 text-[#D4D4D8] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                                        <div class="text-[#3F3F46] font-semibold text-base mb-1">Aucun produit trouvé</div>
-                                        <div class="text-[#A1A1AA] text-sm">Modifiez votre recherche ou lancez une synchronisation avec votre site.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Pagination bas -->
-                            <div class="border-t border-[#E4E4E7] px-4 sm:px-6 py-3 flex items-center bg-[#FAFAFA]">
-                                <span class="text-xs text-gray-500 font-medium mr-3">Afficher par page :</span>
-                                <div class="bg-white border border-[#E4E4E7] rounded-md px-2 py-1 flex items-center gap-4 text-xs text-gray-700 shadow-sm">
-                                    50
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                <div class="bg-shell p-2.5 sm:p-4 rounded-[28px] border border-line shadow-heroMockup">
+                    <img src="app-stock.png" alt="Interface WooRelay Gestion de Stock" class="w-full h-auto rounded-xl sm:rounded-2xl border border-line shadow-innerCard object-cover" />
                 </div>
 
-                <!-- CARTE NOIRE FLOTTANTE -->
                 <div class="mt-4 lg:mt-0 lg:absolute lg:-bottom-6 lg:-left-5 z-20 bg-darkCard text-white p-4 rounded-2xl shadow-floatingDark max-w-xs mx-auto lg:mx-0">
                     <div class="flex items-center gap-3 mb-2">
-                        <div class="w-8 h-8 rounded-xl bg-[#6366F1] flex items-center justify-center text-sm shrink-0">
+                        <div class="w-8 h-8 rounded-xl bg-woo flex items-center justify-center text-sm shrink-0">
                             🔔
                         </div>
                         <div>
@@ -332,7 +188,6 @@
                         🔊 Tester le son de notification
                     </button>
                 </div>
-
             </div>
         </div>
     </header>
@@ -355,42 +210,9 @@
 
         <div class="grid md:grid-cols-2 gap-6 mb-6">
             
-            <!-- Carte 1 : Mockup Statistiques -->
             <div class="bg-shell rounded-[28px] p-5 sm:p-7 border border-line shadow-bentoShell hover:shadow-bentoHover spring-card flex flex-col justify-between" data-aos="fade-up">
-                
-                <!-- Mockup HTML des Statistiques (Responsive) -->
-                <div class="bg-white rounded-xl border border-[#E4E4E7] shadow-innerCard mb-6 overflow-hidden flex flex-col">
-                    <div class="bg-[#171721] h-10 px-3 flex items-center gap-2 overflow-hidden border-b border-[#2A2A35]">
-                        <div class="w-5 h-5 rounded-md bg-[#6366F1] flex items-center justify-center shrink-0"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
-                        <span class="text-white font-bold text-xs truncate">WooRelay</span>
-                        <div class="bg-[#5B5CE6] text-white px-2 py-1 rounded text-[10px] ml-auto shrink-0 flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                            Statistiques
-                        </div>
-                    </div>
-                    
-                    <div class="bg-[#FAFAFA] p-3 space-y-3 font-sans">
-                        <div class="grid grid-cols-2 gap-2">
-                            <div class="bg-white border border-[#E4E4E7] p-2 rounded-lg shadow-sm">
-                                <div class="text-[9px] font-bold text-[#81819A] uppercase flex justify-between">TOTAL CATALOGUE <span class="text-[#5B5CE6]">⊞</span></div>
-                                <div class="font-display font-bold text-lg text-ink leading-none mt-1">0 <span class="text-[9px] font-normal text-[#A1A1AA]">produits</span></div>
-                                <div class="text-[8px] text-[#A1A1AA] mt-1">Dans la base locale PC</div>
-                            </div>
-                            <div class="bg-white border border-[#E4E4E7] p-2 rounded-lg shadow-sm">
-                                <div class="text-[9px] font-bold text-red-500 uppercase flex justify-between">RUPTURES <span class="bg-red-50 text-red-500 rounded px-1 text-[8px]">⚠</span></div>
-                                <div class="font-display font-bold text-lg text-red-500 leading-none mt-1">0 <span class="text-[9px] font-normal text-[#A1A1AA]">à 0 unité</span></div>
-                                <div class="text-[8px] text-[#A1A1AA] mt-1 hidden sm:block">Articles non disponibles à la vente</div>
-                            </div>
-                        </div>
-                        <div class="bg-[#1C1C28] rounded-lg p-3">
-                            <div class="text-white text-xs font-bold mb-2">Rappel des Fonctionnalités Rapides</div>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <div class="text-[8px] text-[#A1A1AA] leading-tight"><span class="text-amber-500">⚡</span> <strong class="text-white">Stock en direct :</strong> Modifiez-le et appuyez sur Entrée. Mis à jour sans recharger.</div>
-                                <div class="text-[8px] text-[#A1A1AA] leading-tight"><span class="text-red-500">🔴</span> <strong class="text-white">Bouton Rupture :</strong> Passe le stock à zéro en 1 clic pour bloquer les ventes.</div>
-                                <div class="text-[8px] text-[#A1A1AA] leading-tight"><span class="text-amber-400">🔔</span> <strong class="text-white">Alertes :</strong> Surveille votre boutique et déclenche un carillon sonore.</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-white rounded-2xl p-2 border border-line shadow-innerCard mb-6">
+                    <img src="app-stats.jpg" alt="Statistiques de la boutique WooRelay" class="w-full h-auto rounded-xl object-cover" />
                 </div>
 
                 <div>
@@ -403,7 +225,6 @@
                 </div>
             </div>
 
-            <!-- Carte 2 : Sélecteur Interactif -->
             <div class="bg-shell rounded-[28px] p-5 sm:p-7 border border-line shadow-bentoShell hover:shadow-bentoHover spring-card flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
                 <div class="bg-white rounded-2xl p-5 border border-line shadow-innerCard mb-6 flex flex-col justify-center min-h-[200px]">
                     <div class="flex items-center justify-between text-xs font-semibold text-ink mb-4">
@@ -452,10 +273,8 @@
 
         </div>
 
-        <!-- Carte 3 : Mockup Réglages & API -->
         <div class="bg-shell rounded-[28px] p-5 sm:p-8 border border-line shadow-bentoShell hover:shadow-bentoHover spring-card" data-aos="fade-up">
             <div class="grid lg:grid-cols-12 gap-8 items-center">
-                
                 <div class="lg:col-span-5 space-y-4">
                     <div class="flex items-center justify-between text-xs text-muted font-mono mb-2">
                         <span>CONNEXION DIRECTE SANS EXTENSION</span>
@@ -469,60 +288,9 @@
                     </p>
                 </div>
 
-                <!-- Mockup HTML des Réglages (Empilement sur mobile) -->
-                <div class="lg:col-span-7 bg-white rounded-xl border border-[#E4E4E7] shadow-innerCard overflow-hidden flex flex-col min-h-[280px]">
-                    <div class="bg-[#171721] h-10 px-3 flex items-center gap-2 overflow-hidden border-b border-[#2A2A35]">
-                        <div class="w-5 h-5 rounded-md bg-[#6366F1] flex items-center justify-center shrink-0"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
-                        <div class="bg-[#5B5CE6] text-white px-2 py-1 rounded text-[10px] ml-auto shrink-0 flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            Connexion & Réglages
-                        </div>
-                    </div>
-                    
-                    <div class="bg-[#FAFAFA] flex-1 p-4 flex flex-col sm:flex-row gap-4 font-sans text-left">
-                        <div class="flex-1 space-y-3">
-                            <div>
-                                <div class="text-sm font-bold text-ink">Connexion Directe à votre WooCommerce</div>
-                                <div class="text-[10px] text-[#A1A1AA]">Vos identifiants restent stockés sur votre PC.</div>
-                            </div>
-                            <div class="space-y-2">
-                                <div>
-                                    <div class="text-[8px] font-bold text-[#81819A] uppercase mb-0.5">URL DE LA BOUTIQUE</div>
-                                    <div class="bg-white border border-[#E4E4E7] rounded p-1.5 text-[10px] text-[#A1A1AA]">https://monsite.com</div>
-                                </div>
-                                <div>
-                                    <div class="text-[8px] font-bold text-[#81819A] uppercase mb-0.5">CLÉ CLIENT (CONSUMER KEY)</div>
-                                    <div class="bg-white border border-[#E4E4E7] rounded p-1.5 text-[10px] text-[#A1A1AA]">ck_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
-                                </div>
-                            </div>
-                            <div class="bg-[#F4F4F5] border border-[#E4E4E7] rounded-lg p-2 flex justify-between items-center">
-                                <div>
-                                    <div class="text-[9px] font-bold text-ink">Devise de votre boutique :</div>
-                                </div>
-                                <div class="bg-[#EEF2FF] text-[#4F46E5] font-bold text-[9px] px-2 py-1 rounded">EUR (€)</div>
-                            </div>
-                        </div>
-
-                        <div class="w-full sm:w-[140px] shrink-0 space-y-3">
-                            <div class="flex items-start justify-between gap-2">
-                                <div>
-                                    <div class="text-[10px] font-bold text-ink leading-tight">Transporteurs</div>
-                                    <div class="text-[8px] text-[#A1A1AA] mt-1 leading-tight">Yalidine, ZR Express...</div>
-                                </div>
-                                <div class="w-6 h-3.5 bg-[#E4E4E7] rounded-full shrink-0 relative"><div class="absolute left-0.5 top-0.5 w-2.5 h-2.5 bg-white rounded-full"></div></div>
-                            </div>
-                            <div class="bg-[#FAFAFA] border border-[#E4E4E7] rounded-lg p-2 text-[8px] text-[#81819A] leading-relaxed flex gap-1">
-                                <span>💡</span>
-                                <span>Désactivé. Activez pour l'expédition.</span>
-                            </div>
-                            <div class="flex flex-col gap-2 pt-2">
-                                <div class="bg-[#5B5CE6] text-center text-white text-[9px] font-bold px-3 py-1.5 rounded">Enregistrer</div>
-                                <div class="bg-white border border-[#E4E4E7] text-center text-ink text-[9px] font-bold px-3 py-1.5 rounded">Tester</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="lg:col-span-7 bg-white rounded-2xl p-2 border border-line shadow-innerCard">
+                    <img src="app-settings.jpg" alt="Réglages et Connexion API WooRelay" class="w-full h-auto rounded-xl object-cover" />
                 </div>
-                
             </div>
         </div>
 
@@ -723,7 +491,7 @@
         </div>
     </section>
 
-    <!-- 7. TÉLÉCHARGEMENT & CONTACT -->
+    <!-- 7. TÉLÉCHARGEMENT & CONTACT (NOUVEAU FORMULAIRE FORMSUBMIT 100% GRATUIT) -->
     <section id="telecharger" class="py-20 sm:py-28 max-w-5xl mx-auto px-4 sm:px-6 border-t border-line">
         <div class="bg-shell rounded-[32px] p-6 sm:p-10 border border-line shadow-bentoShell grid lg:grid-cols-12 gap-10 items-start" data-aos="fade-up">
             
@@ -757,9 +525,14 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-line shadow-innerCard">
-                <form name="contact-woo-relay" method="POST" data-netlify="true" class="space-y-4">
-                    <input type="hidden" name="form-name" value="contact-woo-relay" />
+            <div class="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-line shadow-innerCard relative">
+                
+                <!-- Nouveau formulaire via FormSubmit -->
+                <form id="contact-form" method="POST" class="space-y-4 transition-opacity duration-300">
+                    
+                    <input type="hidden" name="_subject" value="Nouvelle demande WooRelay (.exe) !">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
 
                     <div>
                         <label for="champ-tel" class="block text-xs font-mono uppercase text-body font-medium mb-1.5">
@@ -782,10 +555,25 @@
                         <input id="champ-url" type="text" name="boutique_url" autocomplete="url" class="craft-input w-full rounded-xl px-3.5 py-3 text-ink" />
                     </div>
 
-                    <button type="submit" class="w-full bg-woo hover:bg-woo-hover text-white font-medium py-3.5 px-6 rounded-xl ring-4 ring-woo/15 spring-btn text-sm sm:text-base cursor-pointer mt-2">
-                        Envoyer ma demande (.exe)
+                    <button type="submit" id="submit-btn" class="w-full bg-woo hover:bg-woo-hover text-white font-medium py-3.5 px-6 rounded-xl ring-4 ring-woo/15 spring-btn text-sm sm:text-base cursor-pointer mt-2 flex justify-center items-center gap-2">
+                        <span>Envoyer ma demande (.exe)</span>
                     </button>
                 </form>
+
+                <!-- Message de succès caché -->
+                <div id="success-message" class="absolute inset-0 bg-white rounded-2xl flex flex-col items-center justify-center text-center p-6 opacity-0 pointer-events-none transition-opacity duration-300">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4">
+                        ✓
+                    </div>
+                    <h3 class="text-xl font-bold text-ink mb-2">Demande envoyée !</h3>
+                    <p class="text-body text-sm">
+                        Je vous contacte très rapidement sur WhatsApp ou par e-mail avec votre lien de téléchargement.
+                    </p>
+                    <button onclick="resetForm()" class="mt-6 text-woo text-sm font-medium hover:underline">
+                        Envoyer une autre demande
+                    </button>
+                </div>
+
             </div>
 
         </div>
@@ -895,6 +683,65 @@
                     osc.stop(ctx.currentTime + delais[i] + 0.45);
                 });
             } catch (e) {}
+        }
+
+        // Interception du formulaire FormSubmit
+        var contactForm = document.getElementById('contact-form');
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); 
+
+                var form = e.target;
+                var btn = document.getElementById('submit-btn');
+                var originalBtnText = btn.innerHTML;
+                
+                btn.innerHTML = '<span class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span> Envoi en cours...';
+                btn.disabled = true;
+
+                var formData = new FormData(form);
+
+                fetch('https://formsubmit.co/ajax/rafikbenbey@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        form.classList.add('opacity-0', 'pointer-events-none');
+                        setTimeout(function() {
+                            var successMsg = document.getElementById('success-message');
+                            successMsg.classList.remove('opacity-0', 'pointer-events-none');
+                            successMsg.classList.add('opacity-100');
+                            
+                            btn.innerHTML = originalBtnText;
+                            btn.disabled = false;
+                            form.reset();
+                        }, 300);
+                    } else {
+                        throw new Error('Erreur serveur');
+                    }
+                })
+                .catch(error => {
+                    alert("Erreur lors de l'envoi. Veuillez me contacter directement sur WhatsApp.");
+                    btn.innerHTML = originalBtnText;
+                    btn.disabled = false;
+                });
+            });
+        }
+
+        function resetForm() {
+            var form = document.getElementById('contact-form');
+            var successMsg = document.getElementById('success-message');
+            
+            successMsg.classList.remove('opacity-100');
+            successMsg.classList.add('opacity-0', 'pointer-events-none');
+            
+            setTimeout(function() {
+                form.classList.remove('opacity-0', 'pointer-events-none');
+            }, 300);
         }
     </script>
 </body>
